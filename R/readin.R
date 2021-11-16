@@ -1,10 +1,9 @@
 #' Read in Text
 #'
-#' Read in .txt documents from a specified folder in the working directory
+#' Read in .txt documents from a specified folder found in the current working directory.
 #'
 #' @param folder_name A string.
-#' @param y A number.
-#' @return Dataframe of text documents and their document ID
+#' @return the function \code{readin} with return a single dataframe of text documents and their document ID
 #' @examples
 #' readin("text")
 #' readin("data")
