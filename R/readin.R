@@ -7,6 +7,7 @@
 #' @examples
 #' readin("text")
 #' readin("data")
+#' @export
 
 
 readin <- function(folder_name = "data"){
