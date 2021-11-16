@@ -8,14 +8,12 @@ readin(folder_name = "data")
 }
 \arguments{
 \item{folder_name}{A string.}
-
-\item{y}{A number.}
 }
 \value{
-Dataframe of text documents and their document ID
+the function \code{readin} with return a single dataframe of text documents and their document ID
 }
 \description{
-Read in .txt documents from a specified folder in the working directory
+Read in .txt documents from a specified folder found in the current working directory.
 }
 \examples{
 readin("text")
