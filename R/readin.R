@@ -18,7 +18,7 @@ readin <- function(folder_name = "data"){
     paste(readLines(x), collapse=" ")
   })
 
-  setattr(textdata, "names", file_list)
+  data.table::setattr(textdata, "names", file_list)
 
   df1 <- data.frame(doc_id = rep(names(textdata), lengths(textdata)), doc_text = unlist(textdata), row.names = NULL)
 
