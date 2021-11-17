@@ -2,5 +2,3 @@
 
 export(clean_df)
 export(readin)
-import("stringi,")
-import(tm)
