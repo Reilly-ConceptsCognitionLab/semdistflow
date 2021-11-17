@@ -16,5 +16,4 @@ Imports:
     tm,
     textclean,
     dplyr,
-    stringi,
     tibble
