@@ -21,6 +21,10 @@ readin <- function(folder_name = "data"){
 
   data.table::setattr(textdata, "names", file_list)
 
+  lapply(names(file_list), function(x){
+    lapply(names(file_list[[x]]), function(y) setattr(DT[[x]], y, file_list[[x]][[y]]))
+  })
+
   df1 <- data.frame(doc_id = rep(names(textdata), lengths(textdata)), doc_text = unlist(textdata), row.names = NULL)
 
   return(as_tibble(df1))
