@@ -1,4 +1,3 @@
-#' @import stringi, tm
 clean3 <- function(x) {
   x <- gsub("person person", "person", x)
   x <- gsub("people people", "people", x)
@@ -17,5 +16,5 @@ clean3 <- function(x) {
   #x <- gsub("\\s([[:punct:]])", "", x) #omits floating periods from utterance void of content words
   #x <- gsub("\\.{2,}", "\\. ", x)
   x <- tm::stripWhitespace(x)
-  x <- stringi::stri_remove_empty(x)
+  #x <- stringi::stri_remove_empty(x)
 }
