@@ -15,4 +15,6 @@ Depends:
 Imports: 
     tm,
     textclean,
-    dplyr
+    dplyr,
+    stringi,
+    tibble
