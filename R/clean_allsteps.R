@@ -17,6 +17,6 @@ clean_df <- function(x){
 
   final <- cbind(x,doc_clean)
 
-  return(as.tibble(final))
+  return(as_tibble(final))
 
 }
