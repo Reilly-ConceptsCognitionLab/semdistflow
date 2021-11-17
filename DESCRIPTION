@@ -16,4 +16,5 @@ Imports:
     tm,
     textclean,
     dplyr,
-    tibble
+    tibble,
+    data.table
