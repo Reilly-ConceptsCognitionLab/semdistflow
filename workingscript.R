@@ -1,0 +1,50 @@
+library(devtools)
+library(roxygen2)
+load_all()
+
+doc_id <- "folder/test"
+doc_text<- "Oldestone, the newest culinary interpretation of New Hope's iconic Old Stone Church, has opened at 15 S. Main Street. Next year, the internationally-recognized landmark will celebrate 150 years since its building.
+
+The steak and seafood restaurant celebrates New American cuisine on its menu and salutes church history in its decor. Oldestone also features an authentic jazz and cocktail bar, open seven days a week.
+
+The space was the former home of Marsha Brown's restaurant, which closed during the pandemic; Brown passed the baton to the new owners, including Wilfer Naranjo who had previously worked for her as a food runner. Oldestone will also feature several signature creole dishes from Marsha Brown's recipe collection."
+
+testdata<-as.data.frame(cbind(doc_id,doc_text))
+
+#clean data
+testdata.clean <- clean_df(testdata)
+
+#tokenize cleaned data
+library(tidytext)
+clean_tidy_text<- testdata.clean %>%
+  unnest_tokens(word, doc_clean)
+
+#lemmatize cleaned data
+clean_tidy_text$lemma <- textstem::lemmatize_words(clean_tidy_text$word)
+
+data("wiki_model")
+data("semdist15")
+
+test <- rowwise_cosine_simil(clean_tidy_text, wiki_model, colname1 = "lemma", colname2 = "Var1")
+
+test.rowwise_cosine_simil <- function(data_file = x, word_rating = wordvec, colname1 = "word", colname2 = "word"){
+  joined <-dplyr::left_join(data_file, word_rating, by=c("colname1" = "colname2")) #joins embeddings to lemmas
+  return(as_tibble(joined))
+}
+
+test1<-test.rowwise_cosine_simil(clean_tidy_text, wiki_model, colname1 = lemma, colname2 = Var1)
+
+
+joined <-left_join(clean_tidy_text, wiki_model, by=c("lemma" = "Var1")) #joins embeddings to lemmas
+
+
+setwd("~/Desktop/text_tools copy")
+replacements <- read.csv("db_replacements.csv", header=T) %>% data.frame()
+setwd("~/Documents/GitHub/TextDistanceBeta")
+proj_set(getwd())
+proj_set(rstudioapi::getActiveProject())
+rstudioapi::openProject(proj_get())
+proj_sitrep()
+use_data(replacements)
+
+
