@@ -7,7 +7,8 @@
 #' @examples
 #' readin("text")
 #' readin("data")
-#' @export
+#' @import data.table
+#' @export readin
 
 library(data.table)
 readin <- function(folder_name = "data"){

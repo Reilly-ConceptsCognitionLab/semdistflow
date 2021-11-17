@@ -2,3 +2,4 @@
 
 export(clean_df)
 export(readin)
+import(data.table)
