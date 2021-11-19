@@ -9,6 +9,8 @@
 #' readin("data")
 #' @import data.table
 #' @export readin
+##
+
 
 library(data.table)
 readin <- function(folder_name = "data"){
@@ -27,5 +29,5 @@ readin <- function(folder_name = "data"){
 
   df1 <- data.frame(doc_id = rep(names(textdata), lengths(textdata)), doc_text = unlist(textdata), row.names = NULL)
 
-  return(as_tibble(df1))
+  return(df1)
 }

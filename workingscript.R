@@ -11,13 +11,23 @@ The space was the former home of Marsha Brown's restaurant, which closed during 
 
 testdata<-as.data.frame(cbind(doc_id,doc_text))
 
-#clean data
-testdata.clean <- clean_df(testdata)
+#working read in function
+testfunction <- readin("/Users/bonniezuckerman/Desktop/texts")
 
-#tokenize cleaned data
+#working clean data function
+testdata.clean <- clean_df(testfunction)
+
+#-------------- below codes are not currently working!
+
+
+
+
+#tokenize cleaned data (if not lemmatizing)
 library(tidytext)
 clean_tidy_text<- testdata.clean %>%
   unnest_tokens(word, doc_clean)
+
+
 
 #lemmatize cleaned data
 clean_tidy_text$lemma <- textstem::lemmatize_words(clean_tidy_text$word)
@@ -25,17 +35,15 @@ clean_tidy_text$lemma <- textstem::lemmatize_words(clean_tidy_text$word)
 data("wiki_model")
 data("semdist15")
 
-test <- rowwise_cosine_simil(clean_tidy_text, wiki_model, colname1 = "lemma", colname2 = "Var1")
-
-test.rowwise_cosine_simil <- function(data_file = x, word_rating = wordvec, colname1 = "word", colname2 = "word"){
-  joined <-dplyr::left_join(data_file, word_rating, by=c("colname1" = "colname2")) #joins embeddings to lemmas
-  return(as_tibble(joined))
-}
-
-test1<-test.rowwise_cosine_simil(clean_tidy_text, wiki_model, colname1 = lemma, colname2 = Var1)
+class(clean_tidy_text)
+class(wiki_model)
+str(clean_tidy_text)
+str(wiki_model)
 
 
-joined <-left_join(clean_tidy_text, wiki_model, by=c("lemma" = "Var1")) #joins embeddings to lemmas
+# joining
+test <- rowwise_cosine_simil(data_file = clean_tidy_text, word_rating=wiki_model, colname1 = "word", colname2 = "Var1")
+
 
 
 setwd("~/Desktop/text_tools copy")
