@@ -1,10 +1,19 @@
-#' Import dplyr
-rowwise_cosine_simil <- function(data_file = x, word_rating = wordvec, colname1 = word, colname2 = word){
+#' Rowwise Cosine Calculations
+#'
+#' Details here
+#'
+#' @name rowwise_cosine_simil
+#' @param targetdf a data frame with long list of target words.
+#' @param lookupdb a data frame containing ratings
+#' @export readin
+#' @import dplyr
+#'
+rowwise_cosine_simil <- function(targetdf = x, lookupdb = wordvec, colname1 = word, colname2 = word){
 
   message("Isolating join columns")
-  joining_df<- data_file %>% dplyr::mutate(joincol = colname2) #make a new column names joincol to
+  joining_df<- targetdf %>% dplyr::mutate(joincol = colname2) #make a new column names joincol to
   joincol_df<- joining_df %>% dplyr::select(joincol)
-  joining_wr <- word_rating %>% dplyr::mutate(joincol = colname2)
+  joining_wr <- lookupdb %>% dplyr::mutate(joincol = colname2)
 
   message("Joining data")
 

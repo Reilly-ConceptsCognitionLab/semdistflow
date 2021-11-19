@@ -2,15 +2,20 @@
 % Please edit documentation in R/rowwise_cosine_simil.R
 \name{rowwise_cosine_simil}
 \alias{rowwise_cosine_simil}
-\title{Import dplyr}
+\title{Rowwise Cosine Calculations}
 \usage{
 rowwise_cosine_simil(
-  data_file = x,
-  word_rating = wordvec,
+  targetdf = x,
+  lookupdb = wordvec,
   colname1 = word,
   colname2 = word
 )
 }
+\arguments{
+\item{targetdf}{a data frame with long list of target words.}
+
+\item{lookupdb}{a data frame containing ratings}
+}
 \description{
-Import dplyr
+Details here
 }

@@ -22,31 +22,15 @@ data("semdist15")
 
 #-------------- below codes are not ours!
 
-
 #tokenize cleaned data (if not lemmatizing)
 library(tidytext)
 clean_tidy_text<- testdata.clean %>%
   unnest_tokens(word, doc_clean)
-
-
 #lemmatize cleaned data
 clean_tidy_text$lemma <- textstem::lemmatize_words(clean_tidy_text$word)
-
 
 ##-------------- below codes is working!
 # joining
 test <- rowwise_cosine_simil(data_file = clean_tidy_text, word_rating=wiki_model, colname1 = "word", colname2 = "Var1")
-
 test.euc <- rowwise_euc_diff(data_file = test, word_rating=semdist15, colname1 = "word", colname2 = "word")
-
-
-setwd("~/Desktop/text_tools copy")
-replacements <- read.csv("db_replacements.csv", header=T) %>% data.frame()
-setwd("~/Documents/GitHub/TextDistanceBeta")
-proj_set(getwd())
-proj_set(rstudioapi::getActiveProject())
-rstudioapi::openProject(proj_get())
-proj_sitrep()
-use_data(replacements)
-
 
