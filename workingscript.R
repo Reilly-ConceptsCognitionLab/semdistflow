@@ -15,11 +15,12 @@ testdata<-as.data.frame(cbind(doc_id,doc_text))
 testfunction <- readin("/Users/bonniezuckerman/Desktop/texts")
 
 #working clean data function
-testdata.clean <- clean_df(testfunction)
+testdata.clean <- clean_df(testdata)
 
-#-------------- below codes are not currently working!
+data("wiki_model")
+data("semdist15")
 
-
+#-------------- below codes are not ours!
 
 
 #tokenize cleaned data (if not lemmatizing)
@@ -28,19 +29,11 @@ clean_tidy_text<- testdata.clean %>%
   unnest_tokens(word, doc_clean)
 
 
-
 #lemmatize cleaned data
 clean_tidy_text$lemma <- textstem::lemmatize_words(clean_tidy_text$word)
 
-data("wiki_model")
-data("semdist15")
 
-class(clean_tidy_text)
-class(wiki_model)
-str(clean_tidy_text)
-str(wiki_model)
-
-
+##-------------- below codes is working!
 # joining
 test <- rowwise_cosine_simil(data_file = clean_tidy_text, word_rating=wiki_model, colname1 = "word", colname2 = "Var1")
 

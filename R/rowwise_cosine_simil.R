@@ -1,10 +1,14 @@
 #' Import dplyr
 rowwise_cosine_simil <- function(data_file = x, word_rating = wordvec, colname1 = word, colname2 = word){
 
-  joining_df <- data_file %>% dplyr::mutate(joincol = colname1) #turns blinks into NA for interpolation
+  message("Isolating join columns")
+  joining_df<- data_file %>% dplyr::mutate(joincol = colname2) #make a new column names joincol to
+  joincol_df<- joining_df %>% dplyr::select(joincol)
   joining_wr <- word_rating %>% dplyr::mutate(joincol = colname2)
 
-  joined <-dplyr::left_join(joining_df, joining_wr, by="joincol") #joins embeddings to lemmas
+  message("Joining data")
+
+  joined <-dplyr::left_join(joincol_df, joining_wr, by="joincol") #joins embeddings to lemmas
 
   COSINE2 <- function(x){
     data_num <- dplyr::select_if(x, is.numeric)
@@ -15,7 +19,15 @@ rowwise_cosine_simil <- function(data_file = x, word_rating = wordvec, colname1 
     datwvpairs_row1 <- rbind(x, datwvpairs)
   }
 
-  cosine <- COSINE2(joined) #run cosine similarity on word to word pairs
+  message("Calculating pairwise cosine similarities")
 
-  return(as_tibble(cosine))
+  cosine_df <-COSINE2(joined) #run cosine similarity on word to word pairs
+
+  message("Writing output dataframe")
+
+  output_df<-merge(joining_df, cosine_df, by=0) #joins embeddings to lemmas
+  output_df_clean <- dplyr::select(output_df, -c(Row.names, joincol))
+
+  return(as_tibble(output_df_clean))
 }
+
