@@ -11,7 +11,7 @@ rowwise_euc_diff <- function(data_file = x, word_rating = wordvec, colname1 = wo
   joined <-dplyr::left_join(joincol_df, joining_wr, by="joincol") #joins embeddings to lemmas
 
   EUC2 <- function(x){
-    data_num <- select_if(x, is.numeric)
+    data_num <- dplyr::select_if(x, is.numeric)
     n <- nrow(data_num)
     result <- sqrt(rowSums((data_num[-1, ] - data_num[-n, ])^2))
     dat15pairs <- data.frame(sd15 = (result))

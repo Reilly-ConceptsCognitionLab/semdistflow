@@ -37,6 +37,7 @@ clean_tidy_text$lemma <- textstem::lemmatize_words(clean_tidy_text$word)
 # joining
 test <- rowwise_cosine_simil(data_file = clean_tidy_text, word_rating=wiki_model, colname1 = "word", colname2 = "Var1")
 
+test.euc <- rowwise_euc_diff(data_file = test, word_rating=semdist15, colname1 = "word", colname2 = "word")
 
 
 setwd("~/Desktop/text_tools copy")
