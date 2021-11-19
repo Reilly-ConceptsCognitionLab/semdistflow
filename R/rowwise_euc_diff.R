@@ -1,3 +1,6 @@
+#' Rowwise Euclidean Distance
+#'
+#'
 #' @name rowwise_euc_diff
 #' @import dplyr
 rowwise_euc_diff <- function(data_file = x, word_rating = wordvec, colname1 = word, colname2 = word){
