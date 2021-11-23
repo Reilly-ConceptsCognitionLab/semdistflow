@@ -3,14 +3,6 @@
 \name{rowwise_euc_diff}
 \alias{rowwise_euc_diff}
 \title{Rowwise Euclidean Distance}
-\usage{
-rowwise_euc_diff(
-  data_file = x,
-  word_rating = wordvec,
-  colname1 = word,
-  colname2 = word
-)
-}
 \description{
 Rowwise Euclidean Distance
 }
