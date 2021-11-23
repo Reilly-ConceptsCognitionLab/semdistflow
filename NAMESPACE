@@ -2,5 +2,10 @@
 
 export(clean_df)
 export(readin)
-import(data.table)
-import(dplyr)
+export(rowwise_cosine_simil)
+export(rowwise_euc_diff)
+importFrom(data.table,setattr)
+importFrom(dplyr,left_join)
+importFrom(dplyr,mutate)
+importFrom(dplyr,select)
+importFrom(dplyr,select_if)

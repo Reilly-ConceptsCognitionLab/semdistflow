@@ -5,9 +5,13 @@
 #' @name rowwise_cosine_simil
 #' @param targetdf a data frame with long list of target words.
 #' @param lookupdb a data frame containing ratings
-#' @export readin
-#' @import dplyr
-#'
+#' @param colname1 the column name from targetdf used to join
+#' @param colname2 the column name from lookupdb used to join
+#' @importFrom dplyr mutate
+#' @importFrom dplyr select
+#' @importFrom dplyr select_if
+#' @importFrom dplyr left_join
+#' @export rowwise_cosine_simil
 rowwise_cosine_simil <- function(targetdf = x, lookupdb = wordvec, colname1 = word, colname2 = word){
 
   message("Isolating join columns")

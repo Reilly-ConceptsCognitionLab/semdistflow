@@ -3,6 +3,9 @@
 \name{readin}
 \alias{readin}
 \title{Read in Text}
+\usage{
+readin(folder_name = "data")
+}
 \arguments{
 \item{folder_name}{A string.}
 }

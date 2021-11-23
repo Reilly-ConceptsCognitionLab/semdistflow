@@ -8,12 +8,8 @@
 #' @examples
 #' readin("text")
 #' readin("data")
-#' @import data.table
+#' @importFrom data.table setattr
 #' @export readin
-##
-
-
-library(data.table)
 readin <- function(folder_name = "data"){
 
   file_list <- list.files(folder_name, pattern = "*.txt", recursive = TRUE, full.names = TRUE)

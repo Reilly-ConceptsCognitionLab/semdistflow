@@ -15,7 +15,7 @@ testdata<-as.data.frame(cbind(doc_id,doc_text))
 testfunction <- readin("/Users/bonniezuckerman/Desktop/texts")
 
 #working clean data function
-testdata.clean <- clean_df(testdata)
+testdata.clean <- clean_df(testfunction)
 
 data("wiki_model")
 data("semdist15")

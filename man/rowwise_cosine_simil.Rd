@@ -15,6 +15,10 @@ rowwise_cosine_simil(
 \item{targetdf}{a data frame with long list of target words.}
 
 \item{lookupdb}{a data frame containing ratings}
+
+\item{colname1}{the column name from targetdf used to join}
+
+\item{colname2}{the column name from lookupdb used to join}
 }
 \description{
 Details here
