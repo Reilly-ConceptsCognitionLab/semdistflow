@@ -6,12 +6,11 @@
 #' @return the function \code{clean_df} with return a dataframe of cleaned text documents, their document ID and the raw text.
 #' @examples
 #' clean_df(mydata)
-#' import tibble
+#' @importFrom tibble as_tibble
 #' @export
 
 clean_df <- function(x){
 
-  library(tibble)
 
   rawdat <- x$doc_text
   clean1dat <- clean1(rawdat)

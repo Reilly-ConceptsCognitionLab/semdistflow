@@ -17,5 +17,4 @@ Use helper functions to clean raw text
 }
 \examples{
 clean_df(mydata)
-import tibble
 }

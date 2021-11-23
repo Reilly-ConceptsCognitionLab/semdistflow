@@ -12,6 +12,7 @@
 #' @importFrom dplyr select_if
 #' @importFrom dplyr left_join
 #' @export rowwise_cosine_simil
+#
 rowwise_cosine_simil <- function(targetdf = x, lookupdb = wordvec, colname1 = word, colname2 = word){
 
   message("Isolating join columns")
