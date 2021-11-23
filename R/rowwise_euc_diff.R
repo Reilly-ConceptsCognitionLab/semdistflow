@@ -7,7 +7,7 @@
 #' @importFrom dplyr select_if
 #' @importFrom dplyr left_join
 #' @export rowwise_euc_diff
-#
+NULL
 rowwise_euc_diff <- function(data_file = x, word_rating = wordvec, colname1 = word, colname2 = word){
 
   message("Isolating join columns")
