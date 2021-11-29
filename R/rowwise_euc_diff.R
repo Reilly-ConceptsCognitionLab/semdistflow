@@ -34,7 +34,7 @@ rowwise_euc_diff <- function(data_file = x, word_rating = wordvec, colname1 = wo
 
   message("Writing output dataframe")
 
-  output_df<-merge(joining_df, euc_df, by=0) #joins embeddings to lemmas
+  output_df<-merge(joining_df, euc_df, by=0, order=F) #joins embeddings to lemmas
   output_df_clean <- dplyr::select(output_df, -c(Row.names, joincol))
 
   return(as_tibble(output_df_clean))
