@@ -41,9 +41,8 @@ rowwise_cosine_simil <- function(targetdf = x, lookupdb = wordvec, colname1 = wo
 
   message("Writing output dataframe")
 
-  output_df<-merge(joining_df, cosine_df, by=0, sort = F) #joins embeddings to lemmas
+  output_df<-merge(joining_df, cosine_df, by=0, sort = FALSE) #joins embeddings to lemmas
   output_df_clean <- dplyr::select(output_df, -c(Row.names, joincol))
 
   return(as_tibble(output_df_clean))
 }
-
