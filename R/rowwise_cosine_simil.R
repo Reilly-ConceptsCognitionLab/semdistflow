@@ -17,7 +17,7 @@
 rowwise_cosine_simil <- function(targetdf = x, lookupdb = wordvec, colname1 = word, colname2 = word){
 
   message("Isolating join columns")
-  joining_df<- targetdf %>% dplyr::mutate(joincol = colname2) #make a new column names joincol to
+  joining_df<- targetdf %>% dplyr::mutate(joincol = colname1) #make a new column names joincol to
   joincol_df<- joining_df %>% dplyr::select(joincol)
   joining_wr <- lookupdb %>% dplyr::mutate(joincol = colname2)
 
@@ -28,12 +28,11 @@ rowwise_cosine_simil <- function(targetdf = x, lookupdb = wordvec, colname1 = wo
   COSINE2 <- function(x){
     data_num <- dplyr::select_if(x, is.numeric)
     n <- nrow(data_num)
-    result <- (raster::rowSums(data_num[-1,]*data_num[-n,]))/(sqrt(raster::rowSums(data_num[-1,]^2))*sqrt(raster::rowSums(data_num[-n,]^2)))
+    result <- (rowSums(data_num[-1,]*data_num[-n,]))/(sqrt(rowSums(data_num[-1,]^2))*sqrt(rowSums(data_num[-n,]^2)))
     datwvpairs <- data.frame(cosine.dist = (result))
     x <- rep(NA, ncol(datwvpairs))
     datwvpairs_row1 <- rbind(x, datwvpairs)
   }
-
 
   message("Calculating pairwise cosine similarities")
 
