@@ -4,8 +4,6 @@
 #'
 #' @param x A dataframe with raw text in a column titled "doc_text".
 #' @return the function \code{clean_df} with return a dataframe of cleaned text documents, their document ID and the raw text.
-#' @examples
-#' clean_df(mydata)
 #' @importFrom tibble as_tibble
 #' @export
 
