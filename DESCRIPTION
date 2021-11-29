@@ -17,4 +17,5 @@ Imports:
     textclean,
     dplyr,
     tibble,
-    data.table
+    data.table,
+    raster
