@@ -18,4 +18,6 @@ Imports:
     dplyr,
     tibble,
     data.table,
-    raster
+    raster,
+    magrittr,
+    jmvcore

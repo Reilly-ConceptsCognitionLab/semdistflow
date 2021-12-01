@@ -12,6 +12,8 @@
 #' @importFrom dplyr select_if
 #' @importFrom dplyr left_join
 #' @importFrom raster rowSums
+#' @importFrom jmvcore enquo
+#' @importFrom magrittr %>%
 #' @export rowwise_cosine_simil
 #
 rowwise_cosine_simil <- function(targetdf = x, lookupdb = wordvec, colname1 = NULL, colname2 = NULL){

@@ -10,6 +10,8 @@
 #' @importFrom dplyr select
 #' @importFrom dplyr select_if
 #' @importFrom dplyr left_join
+#' @importFrom jmvcore enquo
+#' @importFrom magrittr %>%
 #' @export rowwise_euc_diff
 NULL
 rowwise_euc_diff <- function(targetdf = x, lookupdb = wordvec, colname1 = NULL, colname2 = NULL){
