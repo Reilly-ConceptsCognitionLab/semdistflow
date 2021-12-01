@@ -28,7 +28,7 @@ rowwise_cosine_simil <- function(targetdf = x, lookupdb = wordvec, colname1 = wo
   COSINE2 <- function(x){
     data_num <- dplyr::select_if(x, is.numeric)
     n <- nrow(data_num)
-    result <- (rowSums(data_num[-1,]*data_num[-n,]))/(sqrt(rowSums(data_num[-1,]^2))*sqrt(rowSums(data_num[-n,]^2)))
+    result <- (raster::rowSums(data_num[-1,]*data_num[-n,]))/(sqrt(raster::rowSums(data_num[-1,]^2))*sqrt(raster::rowSums(data_num[-n,]^2)))
     datwvpairs <- data.frame(cosine.dist = (result))
     x <- rep(NA, ncol(datwvpairs))
     datwvpairs_row1 <- rbind(x, datwvpairs)
