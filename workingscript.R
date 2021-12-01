@@ -13,11 +13,11 @@ testdata<-as.data.frame(cbind(doc_id,doc_text))
 
 #working read in function
 testfunction <- readin("/Users/bonniezuckerman/Desktop/texts")
-testfunction_multi <- readin("/Users/bonniezuckerman/Desktop/multi_texts")
+testfunction_multi <- readin("/Users/bonniezuckerman/Desktop/multi_texts/short")
 
 
 #working clean data function
-testdata.clean <- clean_df(testfunction)
+testdata.clean <- clean_df(testfunction_multi)
 
 data("wiki_model")
 data("semdist15")
@@ -36,7 +36,8 @@ clean_tidy_text$lemma<- textstem::lemmatize_words(clean_tidy_text$word)
 # joining
 
 test <- rowwise_cosine_simil(targetdf = clean_tidy_text, lookupdb = wiki_model, colname1 = lemma, colname2 = Var1)
+test %>% group_by(doc_id) %>% slice(head(row_number(),5))
 
-
-test.euc <- rowwise_euc_diff(data_file = test, word_rating=semdist15, colname1 = lemma, colname2 = word)
+test.euc <- rowwise_euc_diff(targetdf = test, lookupdb=semdist15, colname1 = lemma, colname2 = word)
+test.euc %>% group_by(doc_id) %>% slice(head(row_number(),5))
 

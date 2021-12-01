@@ -18,7 +18,7 @@ rowwise_euc_diff <- function(targetdf = x, lookupdb = wordvec, colname1 = NULL, 
 
   message("Isolating join columns")
   joining_df<- targetdf %>% dplyr::mutate(joincol = !!col1) #make a new column names joincol to
-  joincol_df<- joining_df %>% dplyr::select(joincol)
+  joincol_df<- joining_df %>% dplyr::select(doc_id, joincol)
   joining_wr <- lookupdb %>% dplyr::mutate(joincol = !!col2)
 
   message("Joining data")
@@ -35,13 +35,16 @@ rowwise_euc_diff <- function(targetdf = x, lookupdb = wordvec, colname1 = NULL, 
   }
 
   message("Calculating pairwise euclidian diffs")
-
-  euc_df <-EUC2(joined) #run cosine similarity on word to word pairs
+  by_id <- joined %>% group_by(doc_id)
+  euc_df <-by_id %>% group_modify(~ EUC2(.))
 
   message("Writing output dataframe")
 
-  output_df<-merge(joining_df, euc_df, by=0, sort = FALSE) #joins embeddings to lemmas
-  output_df_clean <- dplyr::select(output_df, -c(Row.names, joincol))
+  output_df<-merge(joining_df, euc_df, by=0:1, sort = FALSE) #joins embeddings to lemmas
+  output_df_lag <- output_df %>%
+    group_by(doc_id) %>%
+    mutate(., lemma_pair1 = lag(lemma), .before = lemma)
+  output_df_clean <- dplyr::select(output_df_lag, -c(Row.names, joincol))
 
   return(as_tibble(output_df_clean))
 }
