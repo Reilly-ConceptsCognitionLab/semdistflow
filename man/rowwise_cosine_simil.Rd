@@ -7,8 +7,8 @@
 rowwise_cosine_simil(
   targetdf = x,
   lookupdb = wordvec,
-  colname1 = word,
-  colname2 = word
+  colname1 = NULL,
+  colname2 = NULL
 )
 }
 \arguments{

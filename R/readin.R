@@ -12,7 +12,7 @@
 #' @export readin
 readin <- function(folder_name = "data"){
 
-  file_list <- list.files(folder_name, pattern = "*.txt", recursive = TRUE, full.names = TRUE)
+  file_list <- list.files(path = folder_name, pattern = "*.txt", recursive = TRUE, full.names = TRUE)
 
   textdata <- lapply(file_list, function(x) {
     paste(readLines(x), collapse=" ")
