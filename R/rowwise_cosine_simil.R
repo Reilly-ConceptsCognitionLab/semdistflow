@@ -14,14 +14,16 @@
 #' @importFrom raster rowSums
 #' @export rowwise_cosine_simil
 #
-rowwise_cosine_simil <- function(targetdf = x, lookupdb = wordvec, colname1 = word, colname2 = word){
+rowwise_cosine_simil <- function(targetdf = x, lookupdb = wordvec, colname1 = NULL, colname2 = NULL){
+  col1 <- enquo(colname1)
+  col2 <- enquo(colname2)
 
   message("Isolating join columns")
-  joining_df<- targetdf %>% dplyr::mutate(joincol = colname1) #make a new column names joincol to
+  joining_df<- targetdf %>% dplyr::mutate(joincol = !!col1) #make a new column names joincol to
   joincol_df<- joining_df %>% dplyr::select(joincol)
-  joining_wr <- lookupdb %>% dplyr::mutate(joincol = colname2)
+  joining_wr <- lookupdb %>% dplyr::mutate(joincol = !!col2)
 
-  message("Joining data")
+  message("Joining data + print")
 
   joined <-dplyr::left_join(joincol_df, joining_wr, by="joincol") #joins embeddings to lemmas
 

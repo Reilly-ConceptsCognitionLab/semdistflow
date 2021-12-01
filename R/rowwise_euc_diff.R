@@ -8,12 +8,14 @@
 #' @importFrom dplyr left_join
 #' @export rowwise_euc_diff
 NULL
-rowwise_euc_diff <- function(data_file = x, word_rating = wordvec, colname1 = word, colname2 = word){
+rowwise_euc_diff <- function(data_file = x, word_rating = wordvec, colname1 = NULL, colname2 = NULL){
+  col1 <- enquo(colname1)
+  col2 <- enquo(colname2)
 
   message("Isolating join columns")
-  joining_df<- data_file %>% dplyr::mutate(joincol = colname1) #make a new column names joincol to
+  joining_df<- data_file %>% dplyr::mutate(joincol = !!col1) #make a new column names joincol to
   joincol_df<- joining_df %>% dplyr::select(joincol)
-  joining_wr <- word_rating %>% dplyr::mutate(joincol = colname2)
+  joining_wr <- word_rating %>% dplyr::mutate(joincol = !!col2)
 
   message("Joining data")
 
@@ -34,7 +36,7 @@ rowwise_euc_diff <- function(data_file = x, word_rating = wordvec, colname1 = wo
 
   message("Writing output dataframe")
 
-  output_df<-merge(joining_df, euc_df, by=0, order=FALSE) #joins embeddings to lemmas
+  output_df<-merge(joining_df, euc_df, by=0, sort = FALSE) #joins embeddings to lemmas
   output_df_clean <- dplyr::select(output_df, -c(Row.names, joincol))
 
   return(as_tibble(output_df_clean))
