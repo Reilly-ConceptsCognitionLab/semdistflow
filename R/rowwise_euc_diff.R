@@ -2,20 +2,24 @@
 #'
 #'
 #' @name rowwise_euc_diff
+#' @param targetdf a data frame with long list of target words.
+#' @param lookupdb a data frame containing ratings
+#' @param colname1 the column name from targetdf used to join
+#' @param colname2 the column name from lookupdb used to join
 #' @importFrom dplyr mutate
 #' @importFrom dplyr select
 #' @importFrom dplyr select_if
 #' @importFrom dplyr left_join
 #' @export rowwise_euc_diff
 NULL
-rowwise_euc_diff <- function(data_file = x, word_rating = wordvec, colname1 = NULL, colname2 = NULL){
+rowwise_euc_diff <- function(targetdf = x, lookupdb = wordvec, colname1 = NULL, colname2 = NULL){
   col1 <- enquo(colname1)
   col2 <- enquo(colname2)
 
   message("Isolating join columns")
-  joining_df<- data_file %>% dplyr::mutate(joincol = !!col1) #make a new column names joincol to
+  joining_df<- targetdf %>% dplyr::mutate(joincol = !!col1) #make a new column names joincol to
   joincol_df<- joining_df %>% dplyr::select(joincol)
-  joining_wr <- word_rating %>% dplyr::mutate(joincol = !!col2)
+  joining_wr <- lookupdb %>% dplyr::mutate(joincol = !!col2)
 
   message("Joining data")
 
