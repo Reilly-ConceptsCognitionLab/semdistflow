@@ -21,18 +21,98 @@ remotes::install_github("bzuck-temple/TextDistanceBeta")
 library(TextDistanceBeta)
 library(tidytext)
 library(tidyverse)
+library(knitr)
+library(kableExtra)
+library(stringr)
 ```
+
+# Preparing your texts
+
+Each text you wish to process should be saved as a .txt file. Your text can be stored in one folder or broken up into multiple folders. The file names in a given folder should be unique. 
+
+## Insert image of folder structure here
 
 # Loading your texts
 
-```{r load, message=FALSE, warning=FALSE}
-mytext <- readin("")
+```{r load example, eval=FALSE}
+mytexts <- readin(".") #reads all .txt in the working directory 
+mytextsinfolder <- readin("./your-text-folder") #reads all texts in a given folder in the working directory 
 ```
+
+```{r load, message=FALSE, warning=FALSE, echo=FALSE}
+folder.path <- system.file("extdata", package = "TextDistanceBeta", mustWork = TRUE)
+mytext <- readin(folder.path)
+```
+
+The resulting data.frame should have two columns "doc_id" and "doc_text". 
+
+```{r, echo=FALSE}
+print.me.vign <- function(x, ...) {
+if (nrow(x) > 10){
+   len <- 10
+    } else {
+       len <- (nrow(x))
+    }
+  
+  x$doc_text <- stringr::str_trunc(x$doc_text, 100)
+   x[1:len,] %>%
+   kbl(digits=2, align= 'l', booktabs=T) %>%
+   kable_styling(fixed_thead = T) %>%
+   kable_paper("striped", full_width = T, html_font = "Helvetica", font_size = 11) %>%       
+     row_spec(0, font_size = 12) %>%
+     column_spec(1:ncol(x), extra_css = 'vertical-align: top !important;') %>% 
+     column_spec(1, width = "5em", extra_css = 'vertical-align: top !important;') %>% 
+   scroll_box(width = "700px", height = "300px") %>%
+   asis_output()
+}
+registerS3method("knit_print", "data.frame", print.me.vign)
+```
+
+```{r, raw table print, echo=FALSE}
+print.me.vign(mytext)
+```
+
+
+If you wish to use this package but want to read in your data another way, you must ensure that you have the columns names "doc_id" and "doc_text". The "doc_id" column but be unique for each text. You may include other columns if you wish. 
 
 # "Cleaning" your data 
 
+Explaining the cleaning functions here. 
+
+1.  __Open Class (Content) Words__ XXXXXX
+
+1.  __Ommissions__ XXXXXXXXX. 
+
+1.  __Replacements__ XXXXXXXXXXXXX.
+
+```{r, echo=FALSE}
+print.me.vign2 <- function(x, ...) {
+if (nrow(x) > 10){
+   len <- 10
+    } else {
+       len <- (nrow(x))
+    }
+  
+  x$doc_text <- stringr::str_trunc(x$doc_text, 100)
+  x$doc_clean <- stringr::str_trunc(x$doc_clean, 100)
+   x[1:len,] %>%
+   kbl(digits=2, align= 'l', booktabs=T) %>%
+   kable_styling(fixed_thead = T) %>%
+   kable_paper("striped", full_width = T, html_font = "Helvetica", font_size = 11) %>%       
+     row_spec(0, font_size = 12) %>%
+     column_spec(1:ncol(x), width = "15em", extra_css = 'vertical-align: top !important;') %>% 
+   scroll_box(width = "700px", height = "300px") %>%
+   asis_output()
+}
+registerS3method("knit_print", "data.frame", print.me.vign)
+```
+
 ```{r clean,}
 mytext.clean <- clean_df(mytext)
+```
+
+```{r, clean table print, echo=FALSE}
+print.me.vign2(mytext.clean)
 ```
 
 # Tokenize and lemmatize your data
@@ -47,20 +127,30 @@ mytext.token$lemma<- textstem::lemmatize_words(mytext.token$word)
 
 ```
 
+```{r, lemma table print, echo=FALSE}
+print.me.vign(mytext.token)
+```
+
 # Between Word Distance Calculations 
 
 ## Using GloVe embeddings
 
-```{r glove, }
-
+```{r glove, message=FALSE}
 mytext.glove <- rowwise_cosine_simil(targetdf = mytext.token, lookupdb = wiki_model, colname1 = lemma, colname2 = Var1)
+```
 
+```{r, glove table print, echo=FALSE}
+print.me.vign(mytext.glove)
 ```
 
 ## Using SemDist15 embeddings
 
-```{r}
-mytext.semdist <- rowwise_cosine_simil(targetdf = mytext.token, lookupdb = semdist15, colname1 = lemma, colname2 = Var1)
+```{r, semdist15, message=FALSE}
+mytext.semdist <- rowwise_cosine_simil(targetdf = mytext.token, lookupdb = semdist15, colname1 = lemma, colname2 = word)
+```
+
+```{r, semdist15 table print, echo=FALSE}
+print.me.vign(mytext.glove)
 ```
 
 # Uses / Plots / Time Course ? 
