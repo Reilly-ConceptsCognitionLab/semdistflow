@@ -21,3 +21,7 @@ Imports:
     raster,
     magrittr,
     jmvcore
+Suggests: 
+    rmarkdown,
+    knitr
+VignetteBuilder: knitr

@@ -17,7 +17,7 @@ testfunction_multi <- readin("/Users/bonniezuckerman/Desktop/multi_texts/short")
 
 
 #working clean data function
-testdata.clean <- clean_df(testfunction_multi)
+testdata.clean <- clean_df(testfunction)
 
 data("wiki_model")
 data("semdist15")
@@ -38,6 +38,12 @@ clean_tidy_text$lemma<- textstem::lemmatize_words(clean_tidy_text$word)
 test <- rowwise_cosine_simil(targetdf = clean_tidy_text, lookupdb = wiki_model, colname1 = lemma, colname2 = Var1)
 test %>% group_by(doc_id) %>% slice(head(row_number(),5))
 
-test.euc <- rowwise_euc_diff(targetdf = test, lookupdb=semdist15, colname1 = lemma, colname2 = word)
+test.sem <- rowwise_cosine_simil(targetdf = clean_tidy_text, lookupdb=semdist15, colname1 = lemma, colname2 = word)
 test.euc %>% group_by(doc_id) %>% slice(head(row_number(),5))
+sticks_cosine<- left_join(test, test.sem, by = c("doc_id", "doc_text", "word", "lemma_pair1", "lemma"), suffix=c(".glove",".semdist15"))
 
+sticks_cosine<- merge(test, test.sem, by = 0:5, suffix=c(".glove",".semdist15"), sort=F)
+write.csv(sticks_cosine, file = "sticks_cosine_213.csv")
+
+library()
+browseVignettes("gazer")

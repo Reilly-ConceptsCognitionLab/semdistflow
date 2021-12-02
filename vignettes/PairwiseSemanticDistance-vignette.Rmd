@@ -1,0 +1,68 @@
+---
+title: "PairwiseSemanticDistance-vignette"
+author: "Bonnie Zuckerman & Jamie Reilly"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{PairwiseSemanticDistance-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, message=FALSE, warning=FALSE}
+remotes::install_github("bzuck-temple/TextDistanceBeta")
+library(TextDistanceBeta)
+library(tidytext)
+library(tidyverse)
+```
+
+# Loading your texts
+
+```{r load, message=FALSE, warning=FALSE}
+mytext <- readin("")
+```
+
+# "Cleaning" your data 
+
+```{r clean,}
+mytext.clean <- clean_df(mytext)
+```
+
+# Tokenize and lemmatize your data
+
+There are many ways to tokenize or lemmatize your data. Here we use the package tidy text to tokenize our data and textstem to lemmatize it. 
+
+```{r token,}
+mytext.token<- mytext.clean %>%
+  unnest_tokens(word, doc_clean)
+
+mytext.token$lemma<- textstem::lemmatize_words(mytext.token$word)
+
+```
+
+# Between Word Distance Calculations 
+
+## Using GloVe embeddings
+
+```{r glove, }
+
+mytext.glove <- rowwise_cosine_simil(targetdf = mytext.token, lookupdb = wiki_model, colname1 = lemma, colname2 = Var1)
+
+```
+
+## Using SemDist15 embeddings
+
+```{r}
+mytext.semdist <- rowwise_cosine_simil(targetdf = mytext.token, lookupdb = semdist15, colname1 = lemma, colname2 = Var1)
+```
+
+# Uses / Plots / Time Course ? 
+
+
