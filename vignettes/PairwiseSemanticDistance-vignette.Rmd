@@ -150,7 +150,7 @@ mytext.semdist <- rowwise_cosine_simil(targetdf = mytext.token, lookupdb = semdi
 ```
 
 ```{r, semdist15 table print, echo=FALSE}
-print.me.vign(mytext.glove)
+print.me.vign(mytext.semdist)
 ```
 
 # Uses / Plots / Time Course ? 
