@@ -155,4 +155,10 @@ print.me.vign(mytext.semdist)
 
 # Uses / Plots / Time Course ? 
 
+```{r}
+mytext.semdist$id<-as.numeric(rownames(mytext.semdist))
+mytext.glove$id<-as.numeric(rownames(mytext.glove))
+ggplot(mytext.semdist, aes(x=id, y=cosine.dist)) + geom_line()
+ggplot(mytext.glove, aes(x=id, y=cosine.dist)) + geom_line()
+```
 
