@@ -24,6 +24,7 @@ library(tidyverse)
 library(knitr)
 library(kableExtra)
 library(stringr)
+library(zoo)
 ```
 
 # Preparing your texts
@@ -156,9 +157,134 @@ print.me.vign(mytext.semdist)
 # Uses / Plots / Time Course ? 
 
 ```{r}
-mytext.semdist$id<-as.numeric(rownames(mytext.semdist))
-mytext.glove$id<-as.numeric(rownames(mytext.glove))
-ggplot(mytext.semdist, aes(x=id, y=cosine.dist)) + geom_line()
-ggplot(mytext.glove, aes(x=id, y=cosine.dist)) + geom_line()
+mytext.semdist<- rename(mytext.semdist, cosine.dist.sem = cosine.dist)
+mytext.glove<- rename(mytext.glove, cosine.dist.glove = cosine.dist)
+mytext_both <-left_join(mytext.semdist,mytext.glove)
+mytext_both<- mytext_both %>% group_by(doc_id) %>% mutate(id = row_number())
+mytext_both_flipped <- mytext_both %>% 
+  mutate(flipped_sem = 1-cosine.dist.sem, flipped_glove = 1-cosine.dist.glove)
 ```
+
+```{r, fig.dim = c(8, 4)}
+long_both_flipped <- mytext_both_flipped %>% 
+  pivot_longer(cols = starts_with("flipped"),
+   names_to = "flipped",
+   values_to = "cosine")
+
+long_both_flipped$text_name <-str_replace(long_both_flipped$doc_id, "/Library/Frameworks/R.framework/Versions/4.1/Resources/library/TextDistanceBeta/extdata/Blake_BookofThel_part1.txt", "BookofThel")
+
+long_both_flipped$text_name <-str_replace(long_both_flipped$text_name, "/Library/Frameworks/R.framework/Versions/4.1/Resources/library/TextDistanceBeta/extdata/sticks2.txt", "Sticks")
+
+mytext_both_flipped_ma <- mytext_both_flipped %>% 
+  group_by(doc_id) %>% 
+  mutate(ma3_glove=rollapply(flipped_glove,3,mean,align='right',fill=NA), ma3_sem=rollapply(flipped_sem,3,mean,align='right',fill=NA))
+
+mytext_both_flipped_ma$text_name <-str_replace(mytext_both_flipped_ma$doc_id, "/Library/Frameworks/R.framework/Versions/4.1/Resources/library/TextDistanceBeta/extdata/Blake_BookofThel_part1.txt", "BookofThel")
+
+mytext_both_flipped_ma$text_name <-str_replace(mytext_both_flipped_ma$text_name, "/Library/Frameworks/R.framework/Versions/4.1/Resources/library/TextDistanceBeta/extdata/sticks2.txt", "Sticks")
+
+
+p0 <- ggplot(mytext_both_flipped_ma , aes(x=id,y=flipped_glove, color=text_name) ) +  geom_line() + scale_color_manual(values = c("#00AFBB", "#E7B800"))
+
+pp0 <- p0 +  geom_point(colour = "red", size = .3)+ facet_wrap(~text_name)
+
+
+p0s <- p0 + geom_smooth(span = 0.15) 
+
+p0ss <- p0s + geom_point(colour = "red", size = .3) + facet_wrap(~text_name)
+
+p0
+pp0
+p0s 
+p0ss
+
+p1 <- ggplot(mytext_both_flipped_ma , aes(x=id,y=ma3_glove, color=text_name) ) +  geom_line() + scale_color_manual(values = c("#00AFBB", "#E7B800"))
+
+pp1 <- p1 +  geom_point(colour = "red", size = .3)+ facet_wrap(~text_name)
+
+
+p1s <- p1 + geom_smooth(span = 0.15) 
+
+p1ss <- p1s + geom_point(colour = "red", size = .3) + facet_wrap(~text_name)
+
+p1
+pp1
+p1s 
+p1ss
+```
+```{r, fig.dim = c(8, 4)}
+ggplot(mytext_both_flipped_ma, aes(x=text_name, y=flipped_glove, fill=text_name)) + 
+    geom_boxplot() + scale_fill_manual(values = c("#00AFBB", "#E7B800"))
+
+ggplot(mytext_both_flipped_ma, aes(x=text_name, y=ma3_glove, fill=text_name)) + 
+    geom_boxplot() + scale_fill_manual(values = c("#00AFBB", "#E7B800"))
+
+```
+
+```{r, fig.dim = c(8, 4)}
+p0 <- ggplot(mytext_both_flipped_ma , aes(x=id,y=flipped_sem, color=text_name) ) +  geom_line() + scale_color_manual(values = c("#00AFBB", "#E7B800"))
+
+pp0 <- p0 +  geom_point(colour = "red", size = .3)+ facet_wrap(~text_name)
+
+
+p0s <- p0 + geom_smooth(span = 0.15) 
+
+p0ss <- p0s + geom_point(colour = "red", size = .3) + facet_wrap(~text_name)
+
+p0
+pp0
+p0s 
+p0ss
+
+p1 <- ggplot(mytext_both_flipped_ma , aes(x=id,y=ma3_sem, color=text_name) ) +  geom_line() + scale_color_manual(values = c("#00AFBB", "#E7B800"))
+
+pp1 <- p1 +  geom_point(colour = "red", size = .3)+ facet_wrap(~text_name)
+
+p1s <- p1 + geom_smooth(span = 0.15) 
+
+p1ss <- p1s +  geom_point(colour = "red", size = .3)+ facet_wrap(~text_name)
+
+p1
+pp1
+p1s 
+p1ss
+```
+
+```{r, fig.dim = c(8, 4)}
+ggplot(mytext_both_flipped_ma, aes(x=text_name, y=flipped_sem, fill=text_name)) + 
+    geom_boxplot() + scale_fill_manual(values = c("#00AFBB", "#E7B800"))
+
+ggplot(mytext_both_flipped_ma, aes(x=text_name, y=ma3_sem, fill=text_name)) + 
+    geom_boxplot() + scale_fill_manual(values = c("#00AFBB", "#E7B800"))
+
+```
+
+
+```{r eval=FALSE}
+
+ggplot(long_both_flipped, aes(x = id, y = cosine), group = flipped) + 
+  geom_line(aes(color = flipped)) +
+  scale_color_manual(values = c("#00AFBB", "#E7B800")) +
+  theme_minimal()  + facet_wrap(~text_name)
+
+p1 <- ggplot(long_both_flipped, aes(x = id, y = cosine), group = text_name) + 
+  geom_line(aes(color = text_name)) +
+  scale_color_manual(values = c("#00AFBB", "#E7B800")) +
+  theme_minimal()  + facet_wrap(~flipped) 
+
+p1 + geom_smooth(aes(group=text_name),
+              method = "lm", formula = y ~ splines::bs(x, 9), se = FALSE,
+              method.args = list(start = list(a = 0.1, b = 0.1)))
+
+ggplot(long_both_flipped, aes(x = id, y = cosine), group = text_name) + geom_area(aes(color = text_name, fill = text_name), 
+            alpha = 0.5, position = position_dodge(0.8)) +
+  scale_color_manual(values = c("#00AFBB", "#E7B800")) +
+  scale_fill_manual(values = c("#00AFBB", "#E7B800")) + facet_wrap(~flipped) 
+
+ggplot(long_both_flipped, aes(x = id, y = cosine), group = flipped) + geom_area(aes(color = flipped, fill = flipped), 
+            alpha = 0.5, position = position_dodge(0.8)) +
+  scale_color_manual(values = c("#00AFBB", "#E7B800")) +
+  scale_fill_manual(values = c("#00AFBB", "#E7B800")) + facet_wrap(~text_name) 
+```
+
 
