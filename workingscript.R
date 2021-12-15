@@ -2,6 +2,9 @@ library(devtools)
 library(roxygen2)
 load_all()
 
+omissions <- db_omissions
+usethis::use_data(omissions, overwrite = TRUE)
+
 doc_id <- "folder/test"
 doc_text<- "Oldestone, the newest culinary interpretation of New Hope's iconic Old Stone Church, has opened at 15 S. Main Street. Next year, the internationally-recognized landmark will celebrate 150 years since its building.
 
