@@ -2,6 +2,18 @@ library(devtools)
 library(roxygen2)
 load_all()
 
+wiki_model_50 <- read.csv("/Users/bonniezuckerman/Documents/GitHub/AphasiaBank/text_tools/wiki_model.csv", header = T)
+wiki_model_100 <- read.csv("/Users/bonniezuckerman/Documents/GitHub/AphasiaBank/text_tools/wiki_model_100d.csv", header = T)
+usethis::use_data(wiki_model_50)
+usethis::use_data(wiki_model_100)
+
+rm("wiki_model_300.rda")
+
+paths <- sort(Sys.glob(c("data/*.rda", "data/*.RData")))
+res <- tools::checkRdaFiles(paths)
+
+document()
+
 doc_id <- "folder/test"
 doc_text<- "Oldestone, the newest culinary interpretation of New Hope's iconic Old Stone Church, has opened at 15 S. Main Street. Next year, the internationally-recognized landmark will celebrate 150 years since its building.
 
