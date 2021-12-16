@@ -22,6 +22,7 @@ rowwise_cosine_simil <- function(targetdf = x, lookupdb = wordvec, colname1 = NU
 
   message("Isolating join columns")
   joining_df<- targetdf %>% dplyr::mutate(joincol = !!col1) #make a new column names joincol to
+  joining_df <- joining_df %>% dplyr::select(doc_id, everything())
   joincol_df<- joining_df %>% dplyr::select(doc_id, joincol)
   joining_wr <- lookupdb %>% dplyr::mutate(joincol = !!col2)
 
