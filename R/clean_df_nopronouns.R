@@ -12,7 +12,7 @@ clean_df_nopronouns <- function(x){
 
   rawdat <- x$doc_text
   clean1dat <- clean1(rawdat)
-  clean2dat <-cclean2_nopronouns(clean1dat)
+  clean2dat <-clean2_nopronouns(clean1dat)
   doc_clean<- clean3(clean2dat)
 
   final <- cbind(x,doc_clean)

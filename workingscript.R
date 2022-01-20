@@ -17,7 +17,7 @@ res <- tools::checkRdaFiles(paths)
 document()
 
 doc_id <- "folder/test"
-doc_text<- "Oldestone, the newest culinary interpretation of New Hope's iconic Old Stone Church, has opened at 15 S. Main Street. Next year, the internationally-recognized landmark will celebrate 150 years since its building.
+doc_text<- "maria, he, them, they Oldestone, their newest culinary interpretation of New Hope's iconic Old Stone Church, has opened at 15 S. Main Street. Next year, the internationally-recognized landmark will celebrate 150 years since its building.
 
 The steak and seafood restaurant celebrates New American cuisine on its menu and salutes church history in its decor. Oldestone also features an authentic jazz and cocktail bar, open seven days a week.
 
@@ -31,7 +31,8 @@ testfunction_multi <- readin("/Users/bonniezuckerman/Desktop/multi_texts/short")
 
 
 #working clean data function
-testdata.clean <- clean_df(testfunction)
+testdata.clean <- clean_df(testdata)
+testdata.cleannopro <- clean_df_nopronouns(testdata)
 
 data("wiki_model")
 data("semdist15")
