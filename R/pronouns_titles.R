@@ -8,7 +8,7 @@ pronouns_titles <- function(x) {
   x <- gsub("(\\s+)(mr\\.)(\\s+)", " man ", x)
   x <- gsub("(\\s+)(mrs\\.)(\\s+)", " woman ", x)
   x <- gsub("(\\s+)(dr\\.)(\\s+)", " doctor ", x)
-  x <- gsub("(\\s+)(ms\\.)(\\s+)", " woman", x)
+  x <- gsub("(\\s+)(ms\\.)(\\s+)", " woman ", x)
   x <- gsub("\\,\\s{0,}(M|m)\\.(D|d)\\.", " doctor", x) #comma followed by 0 or more spaces m.d.
   x <- gsub("\\bdoesn\\'t\\b", "", x)
   x <- gsub("\\betc\\.\\b", "", x)

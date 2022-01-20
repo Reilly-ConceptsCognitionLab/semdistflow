@@ -1,13 +1,19 @@
 library(devtools)
 library(roxygen2)
+library(tidyverse)
 load_all()
 
 wiki_model_50 <- read.csv("/Users/bonniezuckerman/Documents/GitHub/AphasiaBank/text_tools/wiki_model.csv", header = T)
 wiki_model_100 <- read.csv("/Users/bonniezuckerman/Documents/GitHub/AphasiaBank/text_tools/wiki_model_100d.csv", header = T)
-replacements_nopronouns <- read.csv("/Users/bonniezuckerman/Desktop/SticksandPoem/db_replacements_pronounsremoved.csv", header = T)
-usethis::use_data(replacements_nopronouns)
+replacements_nopronouns <- read.csv("/Users/bonniezuckerman/Desktop/SticksandPoem/db_replacements_pronounsremoved.csv", header = T, encoding = "UTF-8")
+usethis::use_data(replacements_nopronouns, overwrite = TRUE)
 usethis::use_data(wiki_model_50)
 usethis::use_data(wiki_model_100)
+
+replacements_nopronouns<- replacements_nopronouns %>%
+  mutate(target = tolower(target))
+
+
 
 rm("wiki_model_300.rda")
 
@@ -17,7 +23,7 @@ res <- tools::checkRdaFiles(paths)
 document()
 
 doc_id <- "folder/test"
-doc_text<- "maria, he, them, they Oldestone, their newest culinary interpretation of New Hope's iconic Old Stone Church, has opened at 15 S. Main Street. Next year, the internationally-recognized landmark will celebrate 150 years since its building.
+doc_text<- "Netherlands, maria, he, them, they Oldestone, their newest culinary interpretation of New Hope's iconic Old Stone Church, has opened at 15 S. Main Street. Next year, the internationally-recognized landmark will celebrate 150 years since its building.
 
 The steak and seafood restaurant celebrates New American cuisine on its menu and salutes church history in its decor. Oldestone also features an authentic jazz and cocktail bar, open seven days a week.
 
@@ -32,8 +38,10 @@ testfunction_multi <- readin("/Users/bonniezuckerman/Desktop/multi_texts/short")
 
 #working clean data function
 testdata.clean <- clean_df(testdata)
-testdata.cleannopro <- clean_df_nopronouns(testdata)
+testdata.clean$doc_clean
 
+testdata.cleannopro <- clean_df_nopronouns(testdata)
+testdata.cleannopro$doc_clean
 data("wiki_model")
 data("semdist15")
 
