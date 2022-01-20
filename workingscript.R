@@ -37,24 +37,33 @@ The space was the former home of Marsha Brown's restaurant, which closed during 
 testdata<-as.data.frame(cbind(doc_id,doc_text))
 
 #working read in function
-testfunction <- readin("/Users/bonniezuckerman/Desktop/texts")
-testfunction_multi <- readin("/Users/bonniezuckerman/Desktop/multi_texts/short")
+testfunction <- readin("/Users/bonniezuckerman/Desktop/ReillyLab/texts")
+testfunction_multi <- readin("/Users/bonniezuckerman/Desktop/ReillyLab/multi_texts/short")
 
 
 #working clean data function
-rawdat <- testdata$doc_text
+rawdat <- testfunction_multi$doc_text
 clean1dat <- clean1(rawdat)
 clean1dat_split <- (strsplit(clean1dat," ")))
 clean2dat <-clean2(clean1dat)
-clean2dat <-clean2.1(clean1dat)
+clean2.1dat <-clean2.1(clean1dat)
 clean2datnp <-clean2_nopronouns(clean1dat)
 
 doc_clean<- clean3(clean2datnp)
 
 clean1dat_split <- unlist(strsplit(clean1dat," "))
+clean2 <- for (i in seq_along(replacements$target)) {
+    y <- gsub(paste0('\\b',replacements$target[i],'\\b'), paste0(' ', replacements$replacement[i],' '), clean1dat_split)
+    return(y)
+}
+
+
 colnames(replacements_nopronouns)
-z <- stringi::stri_replace_all_regex(clean1dat_split, "^" %s+% replacements_nopronouns$target %s+% "$", replacements_nopronouns$replacement, vectorize_all = FALSE)
-a <- stringi::stri_replace_all_regex(clean1dat_split, "^"%s+%replacements$target%s+%"$", replacements$replacement, vectorize_all = FALSE)
+
+Targ <- paste(replacements$target, collapse=" ")
+rep <- paste(replacements$replacement, collapse=" ")
+z <- stringi::stri_replace_all_regex(clean1dat, "^" %s+% replacements_nopronouns$target %s+% "$", replacements_nopronouns$replacement, vectorize_all = FALSE)
+a <- stringi::stri_replace_all_regex(clean1dat, "^"  %s+% replacements$target %s+% "$", replacements$replacement, vectorize_all = FALSE)
 
 colnames(replacements)
 
