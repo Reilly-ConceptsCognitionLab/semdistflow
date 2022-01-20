@@ -1,5 +1,6 @@
 clean2.1 <- function(x) {
-  y <- strsplit(x," ")
-  z <- stringi::stri_replace_all_regex(x, "^"%s+%replacements$target%s+%"$", replacements$replacement, vectorize_all = TRUE)
-  return(z)
+  y <- unlist(strsplit(x, " "))
+  z <- stringi::stri_replace_all_regex(y, "^" %s+% replacements$target %s+% "$", replacements$replacement, vectorize_all = FALSE)
+  a <- paste(z,collapse=" ")
+  return(a)
 }

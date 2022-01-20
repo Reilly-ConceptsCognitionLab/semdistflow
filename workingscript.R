@@ -20,11 +20,7 @@ usethis::use_data(replacements_nopronouns, overwrite = TRUE)
 usethis::use_data(wiki_model_50)
 usethis::use_data(wiki_model_100)
 
-
-
-
-
-rm("wiki_model_300.rda")
+rm(replacements)
 
 paths <- sort(Sys.glob(c("data/*.rda", "data/*.RData")))
 res <- tools::checkRdaFiles(paths)
@@ -48,15 +44,19 @@ testfunction_multi <- readin("/Users/bonniezuckerman/Desktop/multi_texts/short")
 #working clean data function
 rawdat <- testdata$doc_text
 clean1dat <- clean1(rawdat)
-clean1dat_split <- unlist((strsplit(clean1dat," ")))
+clean1dat_split <- (strsplit(clean1dat," ")))
+clean2dat <-clean2(clean1dat)
 clean2dat <-clean2.1(clean1dat)
-doc_clean<- clean3(clean2dat)
+clean2datnp <-clean2_nopronouns(clean1dat)
 
-clean1dat_split <- unlist((strsplit(clean1dat," ")))
+doc_clean<- clean3(clean2datnp)
+
+clean1dat_split <- unlist(strsplit(clean1dat," "))
 colnames(replacements_nopronouns)
-z <- stringi::stri_replace_all_regex(clean1dat_split, "^"%s+%replacements_nopronouns$target%s+%"$", replacements_nopronouns$replacement, vectorize_all = FALSE)
+z <- stringi::stri_replace_all_regex(clean1dat_split, "^" %s+% replacements_nopronouns$target %s+% "$", replacements_nopronouns$replacement, vectorize_all = FALSE)
+a <- stringi::stri_replace_all_regex(clean1dat_split, "^"%s+%replacements$target%s+%"$", replacements$replacement, vectorize_all = FALSE)
 
-
+colnames(replacements)
 
 testdata.clean <- clean_df(testdata)
 testdata.clean$doc_clean
