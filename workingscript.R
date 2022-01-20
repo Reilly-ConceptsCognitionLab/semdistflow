@@ -4,6 +4,8 @@ load_all()
 
 wiki_model_50 <- read.csv("/Users/bonniezuckerman/Documents/GitHub/AphasiaBank/text_tools/wiki_model.csv", header = T)
 wiki_model_100 <- read.csv("/Users/bonniezuckerman/Documents/GitHub/AphasiaBank/text_tools/wiki_model_100d.csv", header = T)
+replacements_nopronouns <- read.csv("/Users/bonniezuckerman/Desktop/SticksandPoem/db_replacements_pronounsremoved.csv", header = T)
+usethis::use_data(replacements_nopronouns)
 usethis::use_data(wiki_model_50)
 usethis::use_data(wiki_model_100)
 
