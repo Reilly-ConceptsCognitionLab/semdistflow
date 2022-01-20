@@ -1,17 +1,26 @@
 library(devtools)
 library(roxygen2)
 library(tidyverse)
+library(stringi)
 load_all()
 
 wiki_model_50 <- read.csv("/Users/bonniezuckerman/Documents/GitHub/AphasiaBank/text_tools/wiki_model.csv", header = T)
 wiki_model_100 <- read.csv("/Users/bonniezuckerman/Documents/GitHub/AphasiaBank/text_tools/wiki_model_100d.csv", header = T)
 replacements_nopronouns <- read.csv("/Users/bonniezuckerman/Desktop/SticksandPoem/db_replacements_pronounsremoved.csv", header = T, encoding = "UTF-8")
+replacements <- read.csv("/Users/bonniezuckerman/Desktop/SticksandPoem/db_replacements.csv", header = T, encoding = "UTF-8")
+
+replacements_nopronouns<- replacements_nopronouns %>%
+  mutate(target = tolower(target))
+
+replacements<- replacements %>%
+  mutate(target = tolower(target))
+
+usethis::use_data(replacements, overwrite = TRUE)
 usethis::use_data(replacements_nopronouns, overwrite = TRUE)
 usethis::use_data(wiki_model_50)
 usethis::use_data(wiki_model_100)
 
-replacements_nopronouns<- replacements_nopronouns %>%
-  mutate(target = tolower(target))
+
 
 
 
@@ -23,7 +32,7 @@ res <- tools::checkRdaFiles(paths)
 document()
 
 doc_id <- "folder/test"
-doc_text<- "Netherlands, maria, he, them, they Oldestone, their newest culinary interpretation of New Hope's iconic Old Stone Church, has opened at 15 S. Main Street. Next year, the internationally-recognized landmark will celebrate 150 years since its building.
+doc_text<- "Mr. Netherlands, spain, mary, John maria, he, them, they Ms. Oldestone, their newest culinary interpretation of New Hope's iconic Old Stone Church, has opened at 15 S. Main Street. Next year, the internationally-recognized landmark will celebrate 150 years since its building.
 
 The steak and seafood restaurant celebrates New American cuisine on its menu and salutes church history in its decor. Oldestone also features an authentic jazz and cocktail bar, open seven days a week.
 
@@ -37,6 +46,18 @@ testfunction_multi <- readin("/Users/bonniezuckerman/Desktop/multi_texts/short")
 
 
 #working clean data function
+rawdat <- testdata$doc_text
+clean1dat <- clean1(rawdat)
+clean1dat_split <- unlist((strsplit(clean1dat," ")))
+clean2dat <-clean2.1(clean1dat)
+doc_clean<- clean3(clean2dat)
+
+clean1dat_split <- unlist((strsplit(clean1dat," ")))
+colnames(replacements_nopronouns)
+z <- stringi::stri_replace_all_regex(clean1dat_split, "^"%s+%replacements_nopronouns$target%s+%"$", replacements_nopronouns$replacement, vectorize_all = FALSE)
+
+
+
 testdata.clean <- clean_df(testdata)
 testdata.clean$doc_clean
 
