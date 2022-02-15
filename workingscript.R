@@ -27,38 +27,40 @@ res <- tools::checkRdaFiles(paths)
 
 document()
 
-doc_id <- "folder/test"
+doc_id <- "folder test"
 doc_text<- "Mr. Netherlands, spain, mary, John maria, he, them, they Ms. Oldestone, their newest culinary interpretation of New Hope's iconic Old Stone Church, has opened at 15 S. Main Street. Next year, the internationally-recognized landmark will celebrate 150 years since its building.
 
 The steak and seafood restaurant celebrates New American cuisine on its menu and salutes church history in its decor. Oldestone also features an authentic jazz and cocktail bar, open seven days a week.
 
 The space was the former home of Marsha Brown's restaurant, which closed during the pandemic; Brown passed the baton to the new owners, including Wilfer Naranjo who had previously worked for her as a food runner. Oldestone will also feature several signature creole dishes from Marsha Brown's recipe collection."
 
-testdata<-as.data.frame(cbind(doc_id,doc_text))
+testdata<-as.data.frame(cbind(doc_text,doc_id))
+
+
+#working clean data function
+rawdat <- testdata$doc_text
+clean1dat <- clean1(rawdat)
+clean2dat <-clean2.1(clean1dat)
+doc_clean<- clean3(clean2dat)
+
+final <- cbind(testdata,doc_clean)
+
+return(as_tibble(final))
 
 #working read in function
 testfunction <- readin("/Users/bonniezuckerman/Desktop/ReillyLab/texts")
 testfunction_multi <- readin("/Users/bonniezuckerman/Desktop/ReillyLab/multi_texts/short")
 
-list_testfunction_multi<- testfunction_multi %>%
+list_testdata<- testdata %>%
   group_split(doc_id) %>%
-  setNames(unique(testfunction_multi$doc_id))
+  setNames(unique(testdata$doc_id))
 
-list_testfunction_text <- list_AB_text <- lapply(list_testfunction_multi, function(x) x %>% select(doc_text))
+list_testdata_clean<- lapply(list_testdata, clean_df_nopronouns)
 
-
-
-#working clean data function
-clean1dat <- clean1(rawdat)
-cleanalldat.l <- lapply(list_testfunction_text, clean_df)
-clean1dat_split <- (strsplit(clean1dat," ")))
-clean2dat <-clean2(clean1dat)
-clean2dat.l <- lapply(clean1dat.l, clean2.1)
-clean2dat.l <- lapply(clean1dat.l, clean2)
 
 
 clean2.1dat <-clean2.1(clean1dat)
-clean2datnp <-clean2_nopronouns(clean1dat)
+testclean <-clean_df_nopronouns(testdata)
 
 doc_clean<- clean3(clean2datnp)
 

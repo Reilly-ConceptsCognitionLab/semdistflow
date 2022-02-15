@@ -8,7 +8,6 @@
 #' @export
 
 clean_df_nopronouns <- function(x){
-
   rawdat <- x$doc_text
   clean1dat <- clean1(rawdat)
   clean2dat <-clean2_nopronouns(clean1dat)
