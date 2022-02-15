@@ -15,6 +15,6 @@ clean_df_nopronouns <- function(x){
 
   final <- cbind(x,doc_clean)
 
-  return(as_tibble(final))
+  return(final)
 
 }
