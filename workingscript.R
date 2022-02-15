@@ -40,12 +40,23 @@ testdata<-as.data.frame(cbind(doc_id,doc_text))
 testfunction <- readin("/Users/bonniezuckerman/Desktop/ReillyLab/texts")
 testfunction_multi <- readin("/Users/bonniezuckerman/Desktop/ReillyLab/multi_texts/short")
 
+list_testfunction_multi<- testfunction_multi %>%
+  group_split(doc_id) %>%
+  setNames(unique(testfunction_multi$doc_id))
+
+list_testfunction_text <- list_AB_text <- lapply(list_testfunction_multi, function(x) x %>% select(doc_text))
+
+
 
 #working clean data function
-rawdat <- testfunction_multi$doc_text
 clean1dat <- clean1(rawdat)
+cleanalldat.l <- lapply(list_testfunction_text, clean_df)
 clean1dat_split <- (strsplit(clean1dat," ")))
 clean2dat <-clean2(clean1dat)
+clean2dat.l <- lapply(clean1dat.l, clean2.1)
+clean2dat.l <- lapply(clean1dat.l, clean2)
+
+
 clean2.1dat <-clean2.1(clean1dat)
 clean2datnp <-clean2_nopronouns(clean1dat)
 

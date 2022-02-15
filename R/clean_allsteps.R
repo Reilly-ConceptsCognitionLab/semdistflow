@@ -10,8 +10,8 @@
 clean_df <- function(x){
 
 
-
-  clean1dat <- clean1(x)
+  rawdat <- x$doc_text
+  clean1dat <- clean1(rawdat)
   clean2dat <-clean2.1(clean1dat)
   doc_clean<- clean3(clean2dat)
 
