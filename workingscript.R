@@ -50,12 +50,31 @@ return(as_tibble(final))
 #working read in function
 testfunction <- readin("/Users/bonniezuckerman/Desktop/ReillyLab/texts")
 testfunction_multi <- readin("/Users/bonniezuckerman/Desktop/ReillyLab/multi_texts/short")
+testfunction_multi$doc_id <- "real"
+testfunction_multi<- rownames_to_column(testfunction_multi)
 
-list_testdata<- testdata %>%
-  group_split(doc_id) %>%
-  setNames(unique(testdata$doc_id))
 
-list_testdata_clean<- lapply(list_testdata, clean_df_nopronouns)
+list_testfunction_multi<- testfunction_multi %>%
+  group_split(rowname) %>%
+  setNames(unique(testfunction_multi$rowname))
+
+list_testdata_clean<- lapply(list_testfunction_multi, clean_df_nopronouns)
+list_testdata_clean1<- lapply(list_testfunction_multi, clean1)
+list_testdata_clean2<- lapply(list_testdata_clean1, clean2_nopronouns)
+list_testdata_clean3<- lapply(list_testdata_clean2, clean3)
+
+
+
+rawdat <- x$doc_text
+mytext.clean_df <- bind_rows(list_testdata_clean) #convert to dataframe
+mytext.clean_df <- mytext.clean_df %>%
+  mutate(line_num = as.numeric(line_num)) %>%
+  arrange(line_num)
+
+
+
+
+
 
 
 
