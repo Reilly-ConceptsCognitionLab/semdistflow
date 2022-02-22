@@ -8,8 +8,8 @@ document()
 
 library(dplyr)
 #working read in function
-testfunction_multi <- readin("/Users/bonniezuckerman/Desktop/ReillyLab/multi_texts/short")
-outputtest3 <-clean_df_bygroup(testfunction_multi)
+testfunction_multi2 <- readin("/Users/bonniezuckerman/Desktop/ReillyLab/multi_texts/short")
+outputtest3 <-clean_df_bygroup(testfunction_multi2)
 data("wiki_model")
 data("semdist15")
 

@@ -9,7 +9,7 @@
 
 clean_df_bygroup <- function(datafile){
 
-  output <- testfunction_multi %>%
+  output <- datafile %>%
     group_by(doc_id) %>%
     group_modify(~ clean_df_nopronouns(.))
 
