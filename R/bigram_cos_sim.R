@@ -2,7 +2,7 @@
 #'
 #' Details here
 #'
-#' @name rowwise_cosine_simil
+#' @name bigram_cos_sim
 #' @param targetdf a data frame with long list of target words.
 #' @param lookupdb a data frame containing ratings
 #' @param colname1 the column name from targetdf used to join
@@ -14,9 +14,9 @@
 #' @importFrom raster rowSums
 #' @importFrom jmvcore enquo
 #' @importFrom magrittr %>%
-#' @export rowwise_cosine_simil
+#' @export bigram_cos_sim
 #
-rowwise_cosine_simil <- function(targetdf = x, lookupdb = wordvec, colname1 = NULL, colname2 = NULL){
+bigram_cos_sim <- function(targetdf = x, lookupdb = wordvec, colname1 = NULL, colname2 = NULL){
   col1 <- enquo(colname1)
   col2 <- enquo(colname2)
 
