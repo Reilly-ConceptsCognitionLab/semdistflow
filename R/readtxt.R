@@ -2,15 +2,15 @@
 #'
 #' Read in .txt documents from a specified folder found in the current working directory.
 #'
-#' @name readin
+#' @name readtxt
 #' @param folder_name A string.
-#' @return the function \code{readin} with return a single dataframe of text documents and their document ID
+#' @return the function \code{readtxt} with return a single dataframe of text documents and their document ID
 #' @examples
-#' readin("text")
-#' readin("data")
+#' readtxt("text")
+#' readtxt("data")
 #' @importFrom data.table setattr
-#' @export readin
-readin <- function(folder_name = "data"){
+#' @export readtxt
+readtxt <- function(folder_name = "data"){
 
   file_list <- list.files(path = folder_name, pattern = "*.txt", recursive = TRUE, full.names = TRUE)
 
