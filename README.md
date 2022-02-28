@@ -17,7 +17,7 @@ You can install the development version of semdistflow from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("bzuck-temple/semdistflow")
+devtools::install_github("Reilly-ConceptsCognitionLab/semdistflow")
 ```
 
 ## Example
