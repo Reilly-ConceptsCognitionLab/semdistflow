@@ -1,10 +1,10 @@
 ---
-title: "PairwiseSemanticDistance-vignette"
+title: "BigramSemanticDistance-vignette"
 author: "Bonnie Zuckerman & Jamie Reilly"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{PairwiseSemanticDistance-vignette}
+  %\VignetteIndexEntry{BigramSemanticDistance-vignette}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -17,14 +17,15 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup, message=FALSE, warning=FALSE}
-remotes::install_github("bzuck-temple/TextDistanceBeta")
-library(TextDistanceBeta)
+remotes::install_github("bzuck-temple/semdistflow")
+library(semdistflow)
 library(tidytext)
 library(tidyverse)
 library(knitr)
 library(kableExtra)
 library(stringr)
 library(zoo)
+library(stringi)
 ```
 
 # Preparing your texts
@@ -36,13 +37,13 @@ Each text you wish to process should be saved as a .txt file. Your text can be s
 # Loading your texts
 
 ```{r load example, eval=FALSE}
-mytexts <- readin(".") #reads all .txt in the working directory 
-mytextsinfolder <- readin("./your-text-folder") #reads all texts in a given folder in the working directory 
+mytexts <- readtxt(".") #reads all .txt in the working directory 
+mytextsinfolder <- readtxt("./your-text-folder") #reads all texts in a given folder in the working directory 
 ```
 
 ```{r load, message=FALSE, warning=FALSE, echo=FALSE}
-folder.path <- system.file("extdata", package = "TextDistanceBeta", mustWork = TRUE)
-mytext <- readin(folder.path)
+folder.path <- system.file("extdata", package = "semdistflow", mustWork = TRUE)
+mytext <- readtxt(folder.path)
 ```
 
 The resulting data.frame should have two columns "doc_id" and "doc_text". 
@@ -137,7 +138,7 @@ print.me.vign(mytext.token)
 ## Using GloVe embeddings
 
 ```{r glove, message=FALSE}
-mytext.glove <- rowwise_cosine_simil(targetdf = mytext.token, lookupdb = wiki_model, colname1 = lemma, colname2 = Var1)
+mytext.glove <- bigram_cos_sim(targetdf = mytext.token, lookupdb = wiki_model, colname1 = lemma, colname2 = Var1)
 ```
 
 ```{r, glove table print, echo=FALSE}
@@ -147,7 +148,7 @@ print.me.vign(mytext.glove)
 ## Using SemDist15 embeddings
 
 ```{r, semdist15, message=FALSE}
-mytext.semdist <- rowwise_cosine_simil(targetdf = mytext.token, lookupdb = semdist15, colname1 = lemma, colname2 = word)
+mytext.semdist <- bigram_cos_sim(targetdf = mytext.token, lookupdb = semdist15, colname1 = lemma, colname2 = word)
 ```
 
 ```{r, semdist15 table print, echo=FALSE}
@@ -171,9 +172,9 @@ long_both_flipped <- mytext_both_flipped %>%
    names_to = "flipped",
    values_to = "cosine")
 
-long_both_flipped$text_name <-str_replace(long_both_flipped$doc_id, "/Library/Frameworks/R.framework/Versions/4.1/Resources/library/TextDistanceBeta/extdata/Blake_BookofThel_part1.txt", "BookofThel")
+long_both_flipped$text_name <-str_replace(long_both_flipped$doc_id, "/Library/Frameworks/R.framework/Versions/4.1/Resources/library/semdistflow/extdata/Blake_BookofThel_part1.txt", "BookofThel")
 
-long_both_flipped$text_name <-str_replace(long_both_flipped$text_name, "/Library/Frameworks/R.framework/Versions/4.1/Resources/library/TextDistanceBeta/extdata/sticks2.txt", "Sticks")
+long_both_flipped$text_name <-str_replace(long_both_flipped$text_name, "/Library/Frameworks/R.framework/Versions/4.1/Resources/library/semdistflow/extdata/sticks2.txt", "Sticks")
 
 long_both_flipped <- long_both_flipped %>% 
   group_by(doc_id) %>% 
