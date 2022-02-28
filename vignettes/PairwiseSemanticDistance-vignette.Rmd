@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup, message=FALSE, warning=FALSE}
-remotes::install_github("bzuck-temple/semdistflow")
+remotes::install_github("Reilly-ConceptsCognitionLab/semdistflow")
 library(semdistflow)
 library(tidytext)
 library(tidyverse)

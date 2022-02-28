@@ -6,9 +6,8 @@ load_all()
 document()
 
 install.packages("devtools")
-devtools::install_github("bzuck-temple/semdistflow")
+devtools::install_github("Reilly-ConceptsCognitionLab/semdistflow")
 library(semdistflow)
-
 library(dplyr)
 library(stringi)
 #working read in function
