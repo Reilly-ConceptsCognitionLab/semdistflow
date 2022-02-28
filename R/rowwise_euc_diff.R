@@ -1,7 +1,7 @@
 #' Rowwise Euclidean Distance
 #'
 #'
-#' @name rowwise_euc_diff
+#' @name bigram_euc_diff
 #' @param targetdf a data frame with long list of target words.
 #' @param lookupdb a data frame containing ratings
 #' @param colname1 the column name from targetdf used to join
@@ -12,9 +12,9 @@
 #' @importFrom dplyr left_join
 #' @importFrom jmvcore enquo
 #' @importFrom magrittr %>%
-#' @export rowwise_euc_diff
+#' @export bigram_euc_diff
 NULL
-rowwise_euc_diff <- function(targetdf = x, lookupdb = wordvec, colname1 = NULL, colname2 = NULL){
+bigram_euc_diff <- function(targetdf = x, lookupdb = wordvec, colname1 = NULL, colname2 = NULL){
   col1 <- enquo(colname1)
   col2 <- enquo(colname2)
 
