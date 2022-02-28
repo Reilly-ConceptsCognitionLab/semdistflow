@@ -5,9 +5,13 @@ library(stringi)
 load_all()
 document()
 
+install.packages("devtools")
+devtools::install_github("bzuck-temple/semdistflow")
+library(semdistflow)
+
 library(dplyr)
 #working read in function
-testfunction_multi2 <- readin("/Users/bonniezuckerman/Desktop/ReillyLab/multi_texts/short")
+testfunction_multi2 <- readtxt("/Users/bonniezuckerman/Desktop/ReillyLab/multi_texts/short")
 outputtest3 <-clean_df_bygroup(testfunction_multi2)
 data("wiki_model")
 data("semdist15")
