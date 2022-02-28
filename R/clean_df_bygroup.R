@@ -5,6 +5,7 @@
 #' @param x A dataframe with of mutiple documents denoted in a column titled "doc_id" and raw text in a column titled "doc_text" .
 #' @return the function \code{clean_df_bygroup} with return a dataframe of cleaned text documents, their document ID and the raw text.
 #' @importFrom tibble as_tibble
+#' @import stringi
 #' @export
 
 clean_df_bygroup <- function(datafile){
