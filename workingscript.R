@@ -5,7 +5,6 @@ library(stringi)
 load_all()
 document()
 
-
 library(dplyr)
 #working read in function
 testfunction_multi2 <- readin("/Users/bonniezuckerman/Desktop/ReillyLab/multi_texts/short")
