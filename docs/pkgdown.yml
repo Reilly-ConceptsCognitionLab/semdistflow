@@ -3,5 +3,8 @@ pkgdown: 2.0.2
 pkgdown_sha: ~
 articles:
   BigramSemanticDistance-vignette: BigramSemanticDistance-vignette.html
-last_built: 2022-03-01T00:17Z
+last_built: 2022-03-01T00:52Z
+urls:
+  reference: https://reilly-conceptscognitionlab.github.io/semdistflow/reference
+  article: https://reilly-conceptscognitionlab.github.io/semdistflow/articles
 
