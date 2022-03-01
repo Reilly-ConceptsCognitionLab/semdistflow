@@ -25,3 +25,4 @@ Suggests:
     rmarkdown,
     knitr
 VignetteBuilder: knitr
+URL: https://reilly-conceptscognitionlab.github.io/semdistflow
