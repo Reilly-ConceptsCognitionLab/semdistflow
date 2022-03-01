@@ -48,30 +48,8 @@ mytext <- readtxt(folder.path)
 
 The resulting data.frame should have two columns "doc_id" and "doc_text". 
 
-```{r, echo=FALSE}
-print.me.vign <- function(x, ...) {
-if (nrow(x) > 10){
-   len <- 10
-    } else {
-       len <- (nrow(x))
-    }
-  
-  x$doc_text <- stringr::str_trunc(x$doc_text, 100)
-   x[1:len,] %>%
-   kbl(digits=2, align= 'l', booktabs=T) %>%
-   kable_styling(fixed_thead = T) %>%
-   kable_paper("striped", full_width = T, html_font = "Helvetica", font_size = 11) %>%       
-     row_spec(0, font_size = 12) %>%
-     column_spec(1:ncol(x), extra_css = 'vertical-align: top !important;') %>% 
-     column_spec(1, width = "5em", extra_css = 'vertical-align: top !important;') %>% 
-   scroll_box(width = "700px", height = "300px") %>%
-   asis_output()
-}
-registerS3method("knit_print", "data.frame", print.me.vign)
-```
-
 ```{r, raw table print, echo=FALSE}
-print.me.vign(mytext)
+head(mytext)
 ```
 
 
@@ -87,34 +65,12 @@ Explaining the cleaning functions here.
 
 1.  __Replacements__ XXXXXXXXXXXXX.
 
-```{r, echo=FALSE}
-print.me.vign2 <- function(x, ...) {
-if (nrow(x) > 10){
-   len <- 10
-    } else {
-       len <- (nrow(x))
-    }
-  
-  x$doc_text <- stringr::str_trunc(x$doc_text, 100)
-  x$doc_clean <- stringr::str_trunc(x$doc_clean, 100)
-   x[1:len,] %>%
-   kbl(digits=2, align= 'l', booktabs=T) %>%
-   kable_styling(fixed_thead = T) %>%
-   kable_paper("striped", full_width = T, html_font = "Helvetica", font_size = 11) %>%       
-     row_spec(0, font_size = 12) %>%
-     column_spec(1:ncol(x), width = "15em", extra_css = 'vertical-align: top !important;') %>% 
-   scroll_box(width = "700px", height = "300px") %>%
-   asis_output()
-}
-registerS3method("knit_print", "data.frame", print.me.vign)
-```
-
 ```{r clean,}
 mytext.clean <- cleanme(mytext)
 ```
 
 ```{r, clean table print, echo=FALSE}
-print.me.vign2(mytext.clean)
+head(mytext.clean)
 ```
 
 # Tokenize and lemmatize your data
@@ -130,7 +86,7 @@ mytext.token$lemma<- textstem::lemmatize_words(mytext.token$word)
 ```
 
 ```{r, lemma table print, echo=FALSE}
-print.me.vign(mytext.token)
+head(mytext.token)
 ```
 
 # Between Word Distance Calculations 
@@ -138,11 +94,11 @@ print.me.vign(mytext.token)
 ## Using GloVe embeddings
 
 ```{r glove, message=FALSE}
-mytext.glove <- bigram_cos_sim(targetdf = mytext.token, lookupdb = wiki_model, colname1 = lemma, colname2 = Var1)
+mytext.glove <- bigram_cos_sim(targetdf = mytext.token, lookupdb = wiki_model_100, colname1 = lemma, colname2 = word)
 ```
 
 ```{r, glove table print, echo=FALSE}
-print.me.vign(mytext.glove)
+head(mytext.glove)
 ```
 
 ## Using SemDist15 embeddings
@@ -152,60 +108,41 @@ mytext.semdist <- bigram_cos_sim(targetdf = mytext.token, lookupdb = semdist15, 
 ```
 
 ```{r, semdist15 table print, echo=FALSE}
-print.me.vign(mytext.semdist)
+head(mytext.semdist)
 ```
 
-# Uses / Plots / Time Course ? 
+# Plot
 
 ```{r}
-mytext.semdist<- rename(mytext.semdist, cosine.dist.sem = cosine.dist)
-mytext.glove<- rename(mytext.glove, cosine.dist.glove = cosine.dist)
-mytext_both <-left_join(mytext.semdist,mytext.glove)
-mytext_both<- mytext_both %>% group_by(doc_id) %>% mutate(id = row_number())
-mytext_both_flipped <- mytext_both %>% 
-  mutate(flipped_sem = 1-cosine.dist.sem, flipped_glove = 1-cosine.dist.glove)
-```
+library(stringr)
+mytext.glove <- mytext.glove %>% 
+  mutate(text_name = sub('.*\\/', '', doc_id))
 
-```{r, fig.dim = c(8, 4)}
-long_both_flipped <- mytext_both_flipped %>% 
-  pivot_longer(cols = starts_with("flipped"),
-   names_to = "flipped",
-   values_to = "cosine")
-
-long_both_flipped$text_name <-str_replace(long_both_flipped$doc_id, "/Library/Frameworks/R.framework/Versions/4.1/Resources/library/semdistflow/extdata/Blake_BookofThel_part1.txt", "BookofThel")
-
-long_both_flipped$text_name <-str_replace(long_both_flipped$text_name, "/Library/Frameworks/R.framework/Versions/4.1/Resources/library/semdistflow/extdata/sticks2.txt", "Sticks")
-
-long_both_flipped <- long_both_flipped %>% 
+mytext.glove<- mytext.glove %>%
   group_by(doc_id) %>% 
-  arrange(id) %>%
-  mutate(ma3=rollapply(cosine,3,mean,align='right',fill=NA), ma3_sd=rollapply(cosine, width=3, sd,  fill=NA))
+  mutate(id = row_number())
 
 
-ggplot(long_both_flipped, aes(x = id, y = ma3), group = flipped) + 
-  geom_line(aes(color = flipped)) + 
-  scale_color_manual(values = c("#00AFBB", "#E7B800")) +
-  theme_minimal()  + facet_wrap(~text_name) 
+theme_plot <- ggplot(mytext.glove, aes(x = id, y=cosine.dist)) +  geom_line(color="#02401BD9") + facet_grid(~text_name, scales="free")
 
-ggplot(long_both_flipped, aes(x = id, y = ma3), color = flipped) +
-    geom_ribbon(aes(ymin=ma3-ma3_sd/2, ymax=ma3+ma3_sd/2), alpha=.8) +
-    geom_point(size = 1, alpha = .7) +
-    geom_smooth(se=FALSE) + facet_wrap(~text_name) 
-
-ggplot(long_both_flipped, aes(x = id, y = ma3), group = text_name) + 
-  geom_line(aes(color = text_name)) +
-  scale_color_manual(values = c("#00AFBB", "#E7B800")) +
-  theme_minimal()  + facet_wrap(~flipped) 
-
-ggplot(long_both_flipped, aes(x = id, y = ma3), group = text_name) + geom_area(aes(color = text_name, fill = text_name), 
-            alpha = 0.5, position = position_dodge(0.8)) +
-  scale_color_manual(values = c("#00AFBB", "#E7B800")) +
-  scale_fill_manual(values = c("#00AFBB", "#E7B800")) + facet_wrap(~flipped) 
-
-ggplot(long_both_flipped, aes(x = id, y = ma3), group = flipped) + geom_area(aes(color = flipped, fill = flipped), 
-            alpha = 0.5, position = position_dodge(0.8)) +
-  scale_color_manual(values = c("#00AFBB", "#E7B800")) +
-  scale_fill_manual(values = c("#00AFBB", "#E7B800")) + facet_wrap(~text_name) 
+theme_plot
 ```
+
+```{r}
+mytext.semdist <- mytext.semdist %>% 
+  mutate(text_name = sub('.*\\/', '', doc_id))
+
+mytext.semdist<- mytext.semdist %>%
+  group_by(doc_id) %>% 
+  mutate(id = row_number())
+
+
+tax_plot <- ggplot(mytext.semdist, aes(x = id, y=cosine.dist)) +  geom_line(color="#EBCC2AA3") + facet_grid(~text_name, scales="free")
+
+tax_plot
+```
+
+
+
 
 
