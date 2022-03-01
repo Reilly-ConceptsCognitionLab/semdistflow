@@ -20,7 +20,8 @@ Imports:
     data.table,
     raster,
     magrittr,
-    jmvcore
+    jmvcore, 
+    remotes
 Suggests: 
     rmarkdown,
     knitr
