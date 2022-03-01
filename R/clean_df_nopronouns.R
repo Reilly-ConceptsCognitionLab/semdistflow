@@ -5,6 +5,7 @@
 #' @param x A dataframe with raw text in a column titled "doc_text".
 #' @return the function \code{clean_df_nopronouns} with return a dataframe of cleaned text documents, their document ID and the raw text.
 #' @importFrom tibble as_tibble
+#' @keywords internal
 
 clean_df_nopronouns <- function(x){
   rawdat <- x$doc_text

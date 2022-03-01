@@ -3,6 +3,7 @@
 #' this code uses gsub to remove titles (Mr., Ms.) and pronouns (him, her) and replaces them with the XX (person, man, women).
 #'
 #' @param x A vector of words.
+#' @keywords internal
 
 pronouns_titles <- function(x) {
   x <- gsub("(\\s+)(mr\\.)(\\s+)", " man ", x)

@@ -12,3 +12,4 @@ pronouns_titles(x)
 \description{
 this code uses gsub to remove titles (Mr., Ms.) and pronouns (him, her) and replaces them with the XX (person, man, women).
 }
+\keyword{internal}
