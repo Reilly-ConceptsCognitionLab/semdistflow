@@ -110,7 +110,7 @@ registerS3method("knit_print", "data.frame", print.me.vign)
 ```
 
 ```{r clean,}
-mytext.clean <- clean_df(mytext)
+mytext.clean <- cleanme(mytext)
 ```
 
 ```{r, clean table print, echo=FALSE}
