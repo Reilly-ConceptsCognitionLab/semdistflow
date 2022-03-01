@@ -5,9 +5,7 @@ library(stringi)
 load_all()
 document()
 
-use_pkgdown()
 build_site()
-use_pkgdown_github_pages()
 
 install.packages("devtools")
 devtools::install_github("Reilly-ConceptsCognitionLab/semdistflow")
