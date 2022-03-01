@@ -15,7 +15,7 @@ cleanme <- function(datafile, replace_pronoun = FALSE){
     message("Performing cleaning retaining pronouns")
   output <- datafile %>%
     group_by(doc_id) %>%
-    group_modify(~ clean_df_nopronouns(.))
+    dplyr::group_modify(~ clean_df_nopronouns(.))
 
   return(output)
 
@@ -25,7 +25,7 @@ cleanme <- function(datafile, replace_pronoun = FALSE){
     message("Performing cleaning replacing pronouns")
     output <- datafile %>%
       group_by(doc_id) %>%
-      group_modify(~ clean_df(.))
+      dplyr::group_modify(~ clean_df(.))
 
     return(output)
 
