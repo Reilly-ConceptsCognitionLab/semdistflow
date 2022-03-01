@@ -31,12 +31,48 @@ You can install the development version of semdistflow from [GitHub](https://git
 devtools::install_github("Reilly-ConceptsCognitionLab/semdistflow")
 ```
 
-## Example
+## Example of Cleaning Function
 
-This is a basic example which shows you how to solve a common problem:
+This is a basic example which shows you how the cleanme function works:
 
 ```{r example}
 library(semdistflow)
-## basic example code
+library(tidyverse)
+
+doc_id <- "fox"
+doc_text <- "The quick brown fox jumps over the lazy dog."
+fox_text <-as.data.frame(cbind(doc_id,doc_text))
+fox_text
 ```
 
+```{r clean}
+fox_clean <- cleanme(fox_text)
+fox_clean
+```
+
+## Example of Semantic Distance Function
+
+This is a basic example which shows you how the cleanme function works:
+
+```{r token}
+fox_token <-fox_clean %>%
+  group_by(doc_id, doc_text) %>%
+  tidytext::unnest_tokens(word, doc_clean, drop=F)
+
+fox_token$lemma<- textstem::lemmatize_words(fox_token$word)
+
+
+fox_token
+```
+
+
+
+```{r semdist}
+fox_dist <-  bigram_cos_sim(targetdf = fox_token, lookupdb = semdist15, colname1 = lemma, colname2 = word)
+
+fox_dist
+```
+
+```{r plot}
+ggplot(fox_dist, aes(x=as.numeric(row.names(fox_dist)), y=cosine.dist)) +  geom_line(color="#02401BD9", size= 1) + theme_classic() + xlab(NULL) + ylab(NULL)
+```
