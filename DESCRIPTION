@@ -2,11 +2,11 @@ Package: semdistflow
 Type: Package
 Title: strip, format, vectorize text to sequential bigram semantic distance
 Version: 0.1.0
-Author: Authors@R: 
-    c(person("Bonnie M.", "Zuckerman", role = c("aut", "cre")), 
-    person("Jamie", "Reilly", role = c("aut", "cre")),
-    person("Celia P.", "Litovsky", role = c("aut", "cre")),
-    person("Ann Marie ", "Finley", role = c("aut", "cre")))
+Authors@R: c(
+    person(c("Bonnie",  "M."), "Zuckerman", role = c("aut")), 
+    person("Jamie", "Reilly", role = c("aut", "cre"), email ="jamie_reilly@temple.edu"),
+    person(c("Celia", "P."), "Litovsky", role = c("aut")),
+    person("Ann Marie ", "Finley", role = c("aut")))
 Maintainer: Jamie Reilly <jamie_reilly@temple.edu>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
@@ -25,7 +25,8 @@ Imports:
     raster,
     magrittr,
     jmvcore, 
-    remotes
+    remotes, 
+    tidytext
 Suggests: 
     rmarkdown,
     knitr
