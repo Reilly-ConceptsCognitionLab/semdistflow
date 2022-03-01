@@ -3,7 +3,6 @@
 export(bigram_cos_sim)
 export(bigram_euc_diff)
 export(clean_df)
-export(clean_df_nopronouns)
 export(cleanme)
 export(readtxt)
 import(stringi)
