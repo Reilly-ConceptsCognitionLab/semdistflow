@@ -6,6 +6,7 @@
 #' @return the function \code{cleanme} with return a dataframe of cleaned text documents, their document ID and the raw text.
 #' @importFrom tibble as_tibble
 #' @import stringi
+#' @import tidyverse
 #' @export
 
 cleanme <- function(datafile, replace_pronoun = FALSE){
