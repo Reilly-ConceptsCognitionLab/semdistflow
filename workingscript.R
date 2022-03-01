@@ -4,7 +4,6 @@ library(tidyverse)
 library(stringi)
 load_all()
 document()
-
 build_site()
 
 install.packages("devtools")
