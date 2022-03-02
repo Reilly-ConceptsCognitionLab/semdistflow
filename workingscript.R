@@ -6,6 +6,8 @@ load_all()
 document()
 build_site()
 
+use_gpl_license(version = 3, include_future = TRUE)
+
 install.packages("devtools")
 devtools::install_github("Reilly-ConceptsCognitionLab/semdistflow")
 library(semdistflow)
