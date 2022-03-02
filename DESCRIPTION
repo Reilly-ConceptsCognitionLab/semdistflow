@@ -8,9 +8,8 @@ Authors@R: c(
     person(c("Celia", "P."), "Litovsky", role = c("aut")),
     person("Ann Marie ", "Finley", role = c("aut")))
 Maintainer: Jamie Reilly <jamie_reilly@temple.edu>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Description: Options for reading your text into R, cleaning and stripping the text to isolate open class words, tokenizing into sequential bigrams and computing semantic distance for each bigram.
+License: GPL(>= 3)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.2

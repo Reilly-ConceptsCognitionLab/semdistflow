@@ -8,7 +8,12 @@
 
 ## Overview
 
-The goal of semdistflow is to …
+‘semdistflow’ transforms any user-specified text into sequential bigrams
+(e.g. ‘The dog drinks the milk’ to dog-drink, drink-milk, etc.). The
+package then computes two metrics of semantic distance for each bigram.
+Users have many options for parameterizing semantic distance and
+tailoring their analyses to their own unique constraints (e.g., omitting
+stopwords, lemmatizing tokens, dimensionality of word embeddings).
 
 ## Installation
 
@@ -26,12 +31,21 @@ This is a basic example which shows you how the cleanme function works:
 
 ``` r
 library(semdistflow)
+#> Loading required package: dplyr
+#> 
+#> Attaching package: 'dplyr'
+#> The following objects are masked from 'package:stats':
+#> 
+#>     filter, lag
+#> The following objects are masked from 'package:base':
+#> 
+#>     intersect, setdiff, setequal, union
 library(tidyverse)
 #> ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
 #> ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
-#> ✓ tibble  3.1.6     ✓ dplyr   1.0.8
-#> ✓ tidyr   1.2.0     ✓ stringr 1.4.0
-#> ✓ readr   2.1.0     ✓ forcats 0.5.1
+#> ✓ tibble  3.1.6     ✓ stringr 1.4.0
+#> ✓ tidyr   1.2.0     ✓ forcats 0.5.1
+#> ✓ readr   2.1.2
 #> ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 #> x dplyr::filter() masks stats::filter()
 #> x dplyr::lag()    masks stats::lag()

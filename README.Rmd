@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 
 ## Overview
 
-The goal of semdistflow is to ...
+‘semdistflow’ transforms any user-specified text into sequential bigrams (e.g. ‘The dog drinks the milk’ to dog-drink, drink-milk, etc.).  The package then computes two metrics of semantic distance for each bigram.  Users have many options for parameterizing semantic distance and tailoring their analyses to their own unique constraints (e.g., omitting stopwords, lemmatizing tokens, dimensionality of word embeddings).
 
 ## Installation
 
