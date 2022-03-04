@@ -8,7 +8,8 @@ bigram_cos_sim(
   targetdf = x,
   lookupdb = wordvec,
   colname1 = NULL,
-  colname2 = NULL
+  colname2 = NULL,
+  flipped = FALSE
 )
 }
 \arguments{

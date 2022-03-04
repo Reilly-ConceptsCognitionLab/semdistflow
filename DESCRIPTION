@@ -27,7 +27,8 @@ Imports:
     jmvcore, 
     remotes, 
     tidytext,
-    tidyverse
+    tidyverse,
+    kableExtra
 Suggests: 
     rmarkdown,
     knitr

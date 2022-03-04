@@ -16,7 +16,7 @@
 #' @importFrom magrittr %>%
 #' @export bigram_cos_sim
 #
-bigram_cos_sim <- function(targetdf = x, lookupdb = wordvec, colname1 = NULL, colname2 = NULL){
+bigram_cos_sim <- function(targetdf = x, lookupdb = wordvec, colname1 = NULL, colname2 = NULL, flipped = FALSE){
   col1 <- enquo(colname1)
   col2 <- enquo(colname2)
 
@@ -53,5 +53,16 @@ bigram_cos_sim <- function(targetdf = x, lookupdb = wordvec, colname1 = NULL, co
     mutate(., lemma_pair1 = lag(lemma), .before = lemma)
   output_df_clean <- dplyr::select(output_df_lag, -c(Row.names, joincol))
 
-  return(as_tibble(output_df_clean))
+
+  if (flipped == FALSE) {
+    return(as_tibble(output_df_clean))
+  }
+
+  if (flipped == TRUE) {
+    output_df_flipped <- output_df_clean %>%
+      mutate(flipped_cosine.dist = 1-cosine.dist)
+    return(as_tibble(output_df_flipped))
+  }
+
+
 }
