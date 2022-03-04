@@ -13,9 +13,8 @@ library(dplyr)
 library(stringi)
 #working read in function
 testfunction_multi2 <- readtxt("/Users/bonniezuckerman/Desktop/ReillyLab/multi_texts/short")
-outputtest3 <-clean_df_bygroup(testfunction_multi2)
-data("wiki_model")
-data("semdist15")
+outputtest3 <-cleanme(testfunction_multi2)
+
 
 #-------------- below codes are not ours!
 
@@ -31,7 +30,7 @@ clean_tidy_text$lemma<- textstem::lemmatize_words(clean_tidy_text$word)
 ##-------------- below codes is working!
 # joining
 
-test <- bigram_cos_sim(targetdf = clean_tidy_text, lookupdb = wiki_model, colname1 = lemma, colname2 = Var1)
+test <- bigram_cos_sim(targetdf = clean_tidy_text, lookupdb = wiki_model_100, colname1 = lemma, colname2 = word, flipped = T)
 test %>% group_by(doc_id) %>% slice(head(row_number(),5))
 test.sem <- bigram_euc_diff(targetdf = clean_tidy_text, lookupdb=semdist15, colname1 = lemma, colname2 = word)
 test.sem %>% group_by(doc_id) %>% slice(head(row_number(),5))

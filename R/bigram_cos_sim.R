@@ -50,7 +50,7 @@ bigram_cos_sim <- function(targetdf = x, lookupdb = wordvec, colname1 = NULL, co
   output_df<-merge(joining_df, cosine_df, by=0:1, sort = FALSE) #joins embeddings to lemmas
   output_df_lag <- output_df %>%
     group_by(doc_id) %>%
-    mutate(., lemma_pair1 = lag(lemma), .before = lemma)
+    mutate(., pair = paste(lag({{colname1}}), {{colname1}}, sep="-"), .after=({{colname1}}))
   output_df_clean <- dplyr::select(output_df_lag, -c(Row.names, joincol))
 
 
