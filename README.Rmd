@@ -20,13 +20,13 @@ knitr::opts_chunk$set(
 
 ## Overview
 
-‘semdistflow’ transforms any user-specified text into sequential bigrams (e.g. ‘The dog drinks the milk’ to dog-drink, drink-milk, etc.).  The package then computes two metrics of semantic distance for each bigram.  Users have many options for parameterizing semantic distance and tailoring their analyses to their own unique constraints (e.g., omitting stopwords, lemmatizing tokens, dimensionality of word embeddings).
+‘semdistflow’ transforms any user-specified text into sequential bigrams (e.g. ‘The dog drinks the milk’ to dog-drink, drink-milk, etc.).  The package can compute metrics of semantic distance for each bigram.  Users have many options for parameterizing semantic distance and tailoring their analyses to their own unique constraints (e.g., omitting stopwords, lemmatizing tokens, dimensionality of word embeddings).
 
 ## Installation
 
 You can install the development version of semdistflow from [GitHub](https://github.com/) with:
 
-``` r
+``` {r }
 # install.packages("devtools")
 devtools::install_github("Reilly-ConceptsCognitionLab/semdistflow")
 ```
@@ -68,11 +68,12 @@ fox_token
 
 
 ```{r semdist}
-fox_dist <-  bigram_cos_sim(targetdf = fox_token, lookupdb = semdist15, colname1 = lemma, colname2 = word)
+fox_dist <-  bigram_cos_sim(targetdf = fox_token, lookupdb = semdist15, colname1 = lemma, colname2 = word, flipped = T)
 
 fox_dist
 ```
 
 ```{r plot}
-ggplot(fox_dist, aes(x=as.numeric(row.names(fox_dist)), y=cosine.dist)) +  geom_line(color="#02401BD9", size= 1) + theme_classic() + xlab(NULL) + ylab(NULL)
+ggplot(fox_dist, aes(x=as.numeric(row.names(fox_dist)), y=flipped_cosine.dist)) +  geom_line(color="#02401BD9", size= 1) + theme_classic() + ylim(0,2) + xlab(NULL) + ylab(NULL)  
+
 ```

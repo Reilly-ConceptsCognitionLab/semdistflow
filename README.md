@@ -10,9 +10,9 @@
 
 ‘semdistflow’ transforms any user-specified text into sequential bigrams
 (e.g. ‘The dog drinks the milk’ to dog-drink, drink-milk, etc.). The
-package then computes two metrics of semantic distance for each bigram.
-Users have many options for parameterizing semantic distance and
-tailoring their analyses to their own unique constraints (e.g., omitting
+package can compute metrics of semantic distance for each bigram. Users
+have many options for parameterizing semantic distance and tailoring
+their analyses to their own unique constraints (e.g., omitting
 stopwords, lemmatizing tokens, dimensionality of word embeddings).
 
 ## Installation
@@ -23,6 +23,8 @@ You can install the development version of semdistflow from
 ``` r
 # install.packages("devtools")
 devtools::install_github("Reilly-ConceptsCognitionLab/semdistflow")
+#> Skipping install of 'semdistflow' from a github remote, the SHA1 (d8ee2589) has not changed since last install.
+#>   Use `force = TRUE` to force installation
 ```
 
 ## Example of Cleaning Function
@@ -95,7 +97,7 @@ fox_token
 ```
 
 ``` r
-fox_dist <-  bigram_cos_sim(targetdf = fox_token, lookupdb = semdist15, colname1 = lemma, colname2 = word)
+fox_dist <-  bigram_cos_sim(targetdf = fox_token, lookupdb = semdist15, colname1 = lemma, colname2 = word, flipped = T)
 #> Isolating join columns
 #> Adding missing grouping variables: `doc_text`
 #> Joining data + print
@@ -103,19 +105,19 @@ fox_dist <-  bigram_cos_sim(targetdf = fox_token, lookupdb = semdist15, colname1
 #> Writing output dataframe
 
 fox_dist
-#> # A tibble: 6 × 7
-#>   doc_id doc_text                  doc_clean word  lemma_pair1 lemma cosine.dist
-#>   <chr>  <chr>                     <chr>     <chr> <chr>       <chr>       <dbl>
-#> 1 fox    The quick brown fox jump… " quick … quick <NA>        quick     NA     
-#> 2 fox    The quick brown fox jump… " quick … brown quick       brown     -0.171 
-#> 3 fox    The quick brown fox jump… " quick … fox   brown       fox        0.481 
-#> 4 fox    The quick brown fox jump… " quick … jumps fox         jump      -0.0473
-#> 5 fox    The quick brown fox jump… " quick … lazy  jump        lazy       0.303 
-#> 6 fox    The quick brown fox jump… " quick … dog   lazy        dog       -0.293
+#> # A tibble: 6 × 8
+#>   doc_id doc_text doc_clean word  lemma_pair1 lemma cosine.dist flipped_cosine.…
+#>   <chr>  <chr>    <chr>     <chr> <chr>       <chr>       <dbl>            <dbl>
+#> 1 fox    The qui… " quick … quick <NA>        quick     NA                NA    
+#> 2 fox    The qui… " quick … brown quick       brown     -0.171             1.17 
+#> 3 fox    The qui… " quick … fox   brown       fox        0.481             0.519
+#> 4 fox    The qui… " quick … jumps fox         jump      -0.0473            1.05 
+#> 5 fox    The qui… " quick … lazy  jump        lazy       0.303             0.697
+#> 6 fox    The qui… " quick … dog   lazy        dog       -0.293             1.29
 ```
 
 ``` r
-ggplot(fox_dist, aes(x=as.numeric(row.names(fox_dist)), y=cosine.dist)) +  geom_line(color="#02401BD9", size= 1) + theme_classic() + xlab(NULL) + ylab(NULL)
+ggplot(fox_dist, aes(x=as.numeric(row.names(fox_dist)), y=flipped_cosine.dist)) +  geom_line(color="#02401BD9", size= 1) + theme_classic() + ylim(0,2) + xlab(NULL) + ylab(NULL)  
 #> Warning: Removed 1 row(s) containing missing values (geom_path).
 ```
 
