@@ -35,7 +35,7 @@ devtools::install_github("Reilly-ConceptsCognitionLab/semdistflow")
 
 This is a basic example which shows you how the cleanme function works:
 
-```{r example}
+```{r example, message=FALSE}
 library(semdistflow)
 library(tidyverse)
 
@@ -74,6 +74,5 @@ fox_dist
 ```
 
 ```{r plot}
-ggplot(fox_dist, aes(x=as.numeric(row.names(fox_dist)), y=flipped_cosine.dist)) +  geom_line(color="#02401BD9", size= 1) + theme_classic() + ylim(0,2) + xlab(NULL) + ylab(NULL)  
-
+ggplot(fox_dist, aes(x=as.numeric(row.names(fox_dist)), y=flipped_cosine.dist)) +  geom_line(color="#02401BD9", size= 1) + theme_classic() + xlab(NULL) + ylab(NULL)  + geom_label(aes(label=pair), size=3, data=fox_dist)  
 ```
