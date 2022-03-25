@@ -26,6 +26,7 @@ library(kableExtra)
 library(stringr)
 library(zoo)
 library(stringi)
+library(printr)
 ```
 
 # Preparing your texts
@@ -49,21 +50,13 @@ mytext <- readtxt(folder.path)
 The resulting data.frame should have two columns "doc_id" and "doc_text". 
 
 ```{r, raw table print, echo=FALSE}
-head(mytext)
+print(mytext)
 ```
 
 
 If you wish to use this package but want to read in your data another way, you must ensure that you have the columns names "doc_id" and "doc_text". The "doc_id" column but be unique for each text. You may include other columns if you wish. 
 
 # "Cleaning" your data 
-
-Explaining the cleaning functions here. 
-
-1.  __Open Class (Content) Words__ XXXXXX
-
-1.  __Ommissions__ XXXXXXXXX. 
-
-1.  __Replacements__ XXXXXXXXXXXXX.
 
 ```{r clean,}
 mytext.clean <- cleanme(mytext)
