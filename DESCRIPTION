@@ -28,9 +28,11 @@ Imports:
     remotes, 
     tidytext,
     tidyverse,
-    kableExtra
+    kableExtra,
+    stringi
 Suggests: 
     rmarkdown,
-    knitr
+    knitr,
+    printr
 VignetteBuilder: knitr
 URL: https://reilly-conceptscognitionlab.github.io/semdistflow
