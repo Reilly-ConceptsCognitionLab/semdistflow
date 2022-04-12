@@ -15,14 +15,14 @@
 #' @export bigram_euc_diff
 NULL
 bigram_euc_diff <- function(targetdf = x, lookupdb = wordvec, colname1 = NULL, colname2 = NULL){
-  col1 <- enquo(colname1)
+  col1 <- enquo(colname1) #enquo allows you to enter column names without quotations
   col2 <- enquo(colname2)
 
   message("Isolating join columns")
   joining_df<- targetdf %>% dplyr::mutate(joincol = !!col1) #make a new column names joincol to
-  joining_df <- joining_df %>% dplyr::select(doc_id, everything())
-  joincol_df<- joining_df %>% dplyr::select(doc_id, joincol)
-  joining_wr <- lookupdb %>% dplyr::mutate(joincol = !!col2)
+  joining_df <- joining_df %>% dplyr::select(doc_id, everything()) #reordering df so doc-id it first
+  joincol_df<- joining_df %>% dplyr::select(doc_id, joincol) #removing columns not used in joining
+  joining_wr <- lookupdb %>% dplyr::mutate(joincol = !!col2) #make a new column names joincol to for lookup database
 
   message("Joining data")
 
