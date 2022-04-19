@@ -29,7 +29,7 @@ library(stringi)
 library(printr)
 ```
 
-# Preparing your texts
+# Preparing Your Texts
 
 Each text you wish to process should be saved as a .txt file. Your text can be stored in one folder or broken up into multiple folders. The file names in a given folder should be unique. 
 
