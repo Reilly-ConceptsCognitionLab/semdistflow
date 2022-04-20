@@ -64,7 +64,7 @@
       <img src="" class="logo" alt=""><h1>BigramSemanticDistance-vignette</h1>
                         <h4 data-toc-skip class="author">Bonnie Zuckerman &amp; Jamie Reilly</h4>
             
-            <h4 data-toc-skip class="date">2022-04-19</h4>
+            <h4 data-toc-skip class="date">2022-04-20</h4>
       
       
       <div class="d-none name"><code>BigramSemanticDistance-vignette.Rmd</code></div>
@@ -73,39 +73,44 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"Reilly-ConceptsCognitionLab/semdistflow"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   </span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>   checking <span class="cf">for</span> file ‘<span class="sc">/</span>private<span class="sc">/</span>var<span class="sc">/</span>folders<span class="sc">/</span>g0<span class="sc">/</span>mjy7jjt50v3cgv592cnt1pw40000gn<span class="sc">/</span>T<span class="sc">/</span>Rtmp6aDpbc<span class="sc">/</span>remotes1b0c3d9335fa<span class="sc">/</span>Reilly<span class="sc">-</span>ConceptsCognitionLab<span class="sc">-</span>semdistflow<span class="sc">-</span>85f7b22<span class="sc">/</span>DESCRIPTION’ ...</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a> [32m✓ [39m   [<span class="dv">38</span>;<span class="dv">5</span>;247mchecking <span class="cf">for</span> file ‘<span class="sc">/</span>private<span class="sc">/</span>var<span class="sc">/</span>folders<span class="sc">/</span>g0<span class="sc">/</span>mjy7jjt50v3cgv592cnt1pw40000gn<span class="sc">/</span>T<span class="sc">/</span>Rtmp6aDpbc<span class="sc">/</span>remotes1b0c3d9335fa<span class="sc">/</span>Reilly<span class="sc">-</span>ConceptsCognitionLab<span class="sc">-</span>semdistflow<span class="sc">-</span>85f7b22<span class="sc">/</span>DESCRIPTION’ [39m [36m [36m (389ms) [36m [39m</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; sp (1.4-6 -&gt; 1.4-7) [CRAN]</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   There is a binary version available but the source version is later:</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    binary source needs_compilation</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; sp  1.4-6  1.4-7              TRUE</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a> [<span class="dv">38</span>;<span class="dv">5</span>;247m─ [39m [<span class="dv">38</span>;<span class="dv">5</span>;247m   [39m [<span class="dv">38</span>;<span class="dv">5</span>;247mpreparing ‘semdistflow’<span class="sc">:</span> [39m [36m [39m</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    checking DESCRIPTION meta-information ...</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a> [32m✓ [39m   [<span class="dv">38</span>;<span class="dv">5</span>;247mchecking DESCRIPTION meta<span class="sc">-</span>information [39m [36m [39m</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a> [<span class="dv">38</span>;<span class="dv">5</span>;247m─ [39m [<span class="dv">38</span>;<span class="dv">5</span>;247m   [39m [<span class="dv">38</span>;<span class="dv">5</span>;247mchecking <span class="cf">for</span> LF line<span class="sc">-</span>endings <span class="cf">in</span> source and make files and shell scripts [39m [36m [39m</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a> [<span class="dv">38</span>;<span class="dv">5</span>;247m─ [39m [<span class="dv">38</span>;<span class="dv">5</span>;247m   [39m [<span class="dv">38</span>;<span class="dv">5</span>;247mchecking <span class="cf">for</span> empty or unneeded directories [39m [36m [39m</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a> [<span class="dv">38</span>;<span class="dv">5</span>;247m─ [39m [<span class="dv">38</span>;<span class="dv">5</span>;247m   [39m [<span class="dv">38</span>;<span class="dv">5</span>;247mbuilding ‘semdistflow_0.<span class="dv">1</span>.<span class="fl">0.</span>tar.gz’ [39m [36m [39m</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(semdistflow)</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(zoo)</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringi)</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(printr)</span></code></pre></div>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   </span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>   checking <span class="cf">for</span> file ‘<span class="sc">/</span>private<span class="sc">/</span>var<span class="sc">/</span>folders<span class="sc">/</span>g0<span class="sc">/</span>mjy7jjt50v3cgv592cnt1pw40000gn<span class="sc">/</span>T<span class="sc">/</span>RtmpOmPG6t<span class="sc">/</span>remotes219357a1ede<span class="sc">/</span>Reilly<span class="sc">-</span>ConceptsCognitionLab<span class="sc">-</span>semdistflow<span class="sc">-</span>45508b6<span class="sc">/</span>DESCRIPTION’ ...</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a> [32m✓ [39m   [<span class="dv">38</span>;<span class="dv">5</span>;247mchecking <span class="cf">for</span> file ‘<span class="sc">/</span>private<span class="sc">/</span>var<span class="sc">/</span>folders<span class="sc">/</span>g0<span class="sc">/</span>mjy7jjt50v3cgv592cnt1pw40000gn<span class="sc">/</span>T<span class="sc">/</span>RtmpOmPG6t<span class="sc">/</span>remotes219357a1ede<span class="sc">/</span>Reilly<span class="sc">-</span>ConceptsCognitionLab<span class="sc">-</span>semdistflow<span class="sc">-</span>45508b6<span class="sc">/</span>DESCRIPTION’ [39m [36m [36m (386ms) [36m [39m</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a> [<span class="dv">38</span>;<span class="dv">5</span>;247m─ [39m [<span class="dv">38</span>;<span class="dv">5</span>;247m   [39m [<span class="dv">38</span>;<span class="dv">5</span>;247mpreparing ‘semdistflow’<span class="sc">:</span> [39m [36m [39m</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    checking DESCRIPTION meta-information ...</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a> [32m✓ [39m   [<span class="dv">38</span>;<span class="dv">5</span>;247mchecking DESCRIPTION meta<span class="sc">-</span>information [39m [36m [39m</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a> [<span class="dv">38</span>;<span class="dv">5</span>;247m─ [39m [<span class="dv">38</span>;<span class="dv">5</span>;247m   [39m [<span class="dv">38</span>;<span class="dv">5</span>;247mchecking <span class="cf">for</span> LF line<span class="sc">-</span>endings <span class="cf">in</span> source and make files and shell scripts [39m [36m [39m</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a> [<span class="dv">38</span>;<span class="dv">5</span>;247m─ [39m [<span class="dv">38</span>;<span class="dv">5</span>;247m   [39m [<span class="dv">38</span>;<span class="dv">5</span>;247mchecking <span class="cf">for</span> empty or unneeded directories [39m [36m [39m</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a> [<span class="dv">38</span>;<span class="dv">5</span>;247m─ [39m [<span class="dv">38</span>;<span class="dv">5</span>;247m   [39m [<span class="dv">38</span>;<span class="dv">5</span>;247mbuilding ‘semdistflow_0.<span class="dv">1</span>.<span class="fl">0.</span>tar.gz’ [39m [36m [39m</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(semdistflow)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(zoo)</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringi)</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(printr)</span></code></pre></div>
 <div class="section level2">
 <h2 id="preparing-your-texts">Preparing Your Texts<a class="anchor" aria-label="anchor" href="#preparing-your-texts"></a>
 </h2>
@@ -119,8 +124,8 @@
 <span class="va">mytextsinfolder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/readtxt.html">readtxt</a></span><span class="op">(</span><span class="st">"./your-text-folder"</span><span class="op">)</span> <span class="co">#reads all texts in a given folder in the working directory </span></code></pre></div>
 <p>The resulting data.frame should have two columns “doc_id” and “doc_text”.</p>
 <pre><code><span class="co">#&gt;                                                                                                                                        doc_id</span>
-<span class="co">#&gt; 1 /private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/Rtmp2ocn28/temp_libpath159b24948252/semdistflow/extdata/Blake_BookofThel_part1.txt</span>
-<span class="co">#&gt; 2                /private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/Rtmp2ocn28/temp_libpath159b24948252/semdistflow/extdata/sticks2.txt</span>
+<span class="co">#&gt; 1 /private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/RtmpChJuwW/temp_libpath1f85515cf38a/semdistflow/extdata/Blake_BookofThel_part1.txt</span>
+<span class="co">#&gt; 2                /private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/RtmpChJuwW/temp_libpath1f85515cf38a/semdistflow/extdata/sticks2.txt</span>
 <span class="co">#&gt;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          doc_text</span>
 <span class="co">#&gt; 1 The daughters of Mne Seraphim led round their sunny flocks. All but the youngest; she in paleness sought the secret air.  To fade away like morning beauty from her mortal day:  Down by the river of Adona her soft voice is heard:  And thus her gentle lamentation falls like morning dew.   O life of this our spring! why fades the lotus of the water? Why fade these children of the spring? born but to smile &amp; fall.  Ah! Thel is like a watry bow. and like a parting cloud.  Like a reflection in a glass. like shadows in the water.  Like dreams of infants. like a smile upon an infants face, Like the doves voice, like transient day, like music in the air;  Ah! gentle may I lay me down, and gentle rest my head, And gentle sleep the sleep of death. and gentle hear the voice Of him that walketh in the garden in the evening time.  The Lilly of the valley breathing in the humble grass Answer'd the lovely maid and said: I am a watry weed, And I am very small, and love to dwell in lowly vales; So weak, the gilded butterfly scarce perches on my head.  Yet I am visited from heaven and he that smiles on all.  Walks in the valley. and each morn over me spreads his hand  Saying, rejoice thou humble grass, thou new-born lilly flower, Thou gentle maid of silent valleys. and of modest brooks; For thou shalt be clothed in light, and fed with morning manna:  Till summers heat melts thee beside the fountains and the springs To flourish in eternal vales: then why should Thel complain,   Why should the mistress of the vales of Har, utter a sigh.   She ceasd &amp; smild in tears, then sat down in her silver shrine.  Thel answered. O thou little virgin of the peaceful valley.  Giving to those that cannot crave, the voiceless, the o'ertired.  Thy breath doth nourish the innocent lamb, he smells thy milky garments, He crops thy flowers. while thou sittest smiling in his face, Wiping his mild and meekin mouth from all contagious taints. Thy wine doth purify the golden honey, thy perfume, Which thou dost scatter on every little blade of grass that springs, Revives the milked cow, &amp; tames the fire-breathing steed. But Thel is like a faint cloud kindled at the rising sun: I vanish from my pearly throne, and who shall find my place?"  "Queen of the vales," the Lily answered, "ask the tender cloud, And it shall tell thee why it glitters in the morning sky, And why it scatters its bright beauty thro' the humid air. Descend, O little cloud, &amp; hover before the eyes of Thel."  The Cloud descended, and the Lily bowd her modest head, And went to mind her numerous charge among the verdant grass.</span>
 <span class="co">#&gt; 2                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          Every year Thanksgiving night we flocked out behind Dad as he dragged the Santa suit to the road and draped it over a kind of crucifix he'd built out of metal pole in the yard. Super Bowl week the pole was dressed in a jersey and Rod's helmet and Rod had to clear it with Dad if he wanted to take the helmet off. On the Fourth of July the pole was Uncle Sam, on Veteran’s Day a soldier,  on Halloween a ghost. The pole was Dad's only concession to glee. We were allowed a single Crayola from the box at a time. One Christmas Eve he shrieked at Kimmie for wasting an apple slice. He hovered over us as we poured ketchup saying: good enough good enough good enough. Birthday parties consisted of cupcakes, no ice cream. The first time I brought a date over she said: what's with your dad and that pole? and I sat there blinking. We left home, married,  had children of our own, found the seeds of meanness blooming also within us. Dad began dressing the pole with more complexity and less discernible logic. He draped some kind of fur over it on Groundhog Day and lugged out a floodlight to ensure a shadow. When an earthquake struck Chile he lay the pole on its side and spray painted a rift in the earth. Mom died and he dressed the pole as Death and hung from the crossbar photos of Mom as a baby. We'd stop by and find odd talismans from his youth arranged around the base: army medals, theater tickets, old sweatshirts, tubes of Mom's makeup. One autumn he painted the pole bright yellow. He covered it with cotton swabs that winter for warmth and provided offspring by hammering in six crossed sticks around the yard. He ran lengths of string between the pole and the sticks, and taped to the string letters of apology, admissions of error, pleas for understanding, all written in a frantic hand on index cards. He painted a sign saying LOVE and hung it from the pole and another that said FORGIVE? and then he died in the hall with the radio on and we sold the house to a young couple who yanked out the pole and the sticks and left them by the road on garbage day.</span></code></pre>
@@ -152,12 +157,12 @@
 <span class="co">#&gt; <span style="color: #949494;"># Groups:   doc_id [1]</span></span>
 <span class="co">#&gt;   doc_id                                                             word  lemma</span>
 <span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> /private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/Rtmp2ocn… daug… daug…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> /private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/Rtmp2ocn… mne   mne  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> /private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/Rtmp2ocn… sera… sera…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> /private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/Rtmp2ocn… led   lead </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> /private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/Rtmp2ocn… round round</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> /private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/Rtmp2ocn… their their</span></code></pre>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> /private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/RtmpChJu… daug… daug…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> /private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/RtmpChJu… mne   mne  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> /private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/RtmpChJu… sera… sera…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> /private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/RtmpChJu… led   lead </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> /private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/RtmpChJu… round round</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> /private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/RtmpChJu… their their</span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="between-word-distance-calculations">Between Word Distance Calculations<a class="anchor" aria-label="anchor" href="#between-word-distance-calculations"></a>
@@ -188,7 +193,7 @@ cosine.dist
 <tbody>
 <tr>
 <td style="text-align:left;">
-/private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/Rtmp2ocn28/temp_libpath159b24948252/semdistflow/extdata/Blake_BookofThel_part1.txt
+/private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/RtmpChJuwW/temp_libpath1f85515cf38a/semdistflow/extdata/Blake_BookofThel_part1.txt
 </td>
 <td style="text-align:left;">
 daughters
@@ -205,7 +210,7 @@ NA
 </tr>
 <tr>
 <td style="text-align:left;">
-/private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/Rtmp2ocn28/temp_libpath159b24948252/semdistflow/extdata/Blake_BookofThel_part1.txt
+/private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/RtmpChJuwW/temp_libpath1f85515cf38a/semdistflow/extdata/Blake_BookofThel_part1.txt
 </td>
 <td style="text-align:left;">
 mne
@@ -222,7 +227,7 @@ NA
 </tr>
 <tr>
 <td style="text-align:left;">
-/private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/Rtmp2ocn28/temp_libpath159b24948252/semdistflow/extdata/Blake_BookofThel_part1.txt
+/private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/RtmpChJuwW/temp_libpath1f85515cf38a/semdistflow/extdata/Blake_BookofThel_part1.txt
 </td>
 <td style="text-align:left;">
 seraphim
@@ -239,7 +244,7 @@ NA
 </tr>
 <tr>
 <td style="text-align:left;">
-/private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/Rtmp2ocn28/temp_libpath159b24948252/semdistflow/extdata/Blake_BookofThel_part1.txt
+/private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/RtmpChJuwW/temp_libpath1f85515cf38a/semdistflow/extdata/Blake_BookofThel_part1.txt
 </td>
 <td style="text-align:left;">
 led
@@ -256,7 +261,7 @@ NA
 </tr>
 <tr>
 <td style="text-align:left;">
-/private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/Rtmp2ocn28/temp_libpath159b24948252/semdistflow/extdata/Blake_BookofThel_part1.txt
+/private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/RtmpChJuwW/temp_libpath1f85515cf38a/semdistflow/extdata/Blake_BookofThel_part1.txt
 </td>
 <td style="text-align:left;">
 round
@@ -273,7 +278,7 @@ lead-round
 </tr>
 <tr>
 <td style="text-align:left;">
-/private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/Rtmp2ocn28/temp_libpath159b24948252/semdistflow/extdata/Blake_BookofThel_part1.txt
+/private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/RtmpChJuwW/temp_libpath1f85515cf38a/semdistflow/extdata/Blake_BookofThel_part1.txt
 </td>
 <td style="text-align:left;">
 their
@@ -317,7 +322,7 @@ cosine.dist
 <tbody>
 <tr>
 <td style="text-align:left;">
-/private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/Rtmp2ocn28/temp_libpath159b24948252/semdistflow/extdata/Blake_BookofThel_part1.txt
+/private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/RtmpChJuwW/temp_libpath1f85515cf38a/semdistflow/extdata/Blake_BookofThel_part1.txt
 </td>
 <td style="text-align:left;">
 daughters
@@ -334,7 +339,7 @@ NA
 </tr>
 <tr>
 <td style="text-align:left;">
-/private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/Rtmp2ocn28/temp_libpath159b24948252/semdistflow/extdata/Blake_BookofThel_part1.txt
+/private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/RtmpChJuwW/temp_libpath1f85515cf38a/semdistflow/extdata/Blake_BookofThel_part1.txt
 </td>
 <td style="text-align:left;">
 mne
@@ -351,7 +356,7 @@ NA
 </tr>
 <tr>
 <td style="text-align:left;">
-/private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/Rtmp2ocn28/temp_libpath159b24948252/semdistflow/extdata/Blake_BookofThel_part1.txt
+/private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/RtmpChJuwW/temp_libpath1f85515cf38a/semdistflow/extdata/Blake_BookofThel_part1.txt
 </td>
 <td style="text-align:left;">
 seraphim
@@ -368,7 +373,7 @@ NA
 </tr>
 <tr>
 <td style="text-align:left;">
-/private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/Rtmp2ocn28/temp_libpath159b24948252/semdistflow/extdata/Blake_BookofThel_part1.txt
+/private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/RtmpChJuwW/temp_libpath1f85515cf38a/semdistflow/extdata/Blake_BookofThel_part1.txt
 </td>
 <td style="text-align:left;">
 led
@@ -385,7 +390,7 @@ NA
 </tr>
 <tr>
 <td style="text-align:left;">
-/private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/Rtmp2ocn28/temp_libpath159b24948252/semdistflow/extdata/Blake_BookofThel_part1.txt
+/private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/RtmpChJuwW/temp_libpath1f85515cf38a/semdistflow/extdata/Blake_BookofThel_part1.txt
 </td>
 <td style="text-align:left;">
 round
@@ -402,7 +407,7 @@ NA
 </tr>
 <tr>
 <td style="text-align:left;">
-/private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/Rtmp2ocn28/temp_libpath159b24948252/semdistflow/extdata/Blake_BookofThel_part1.txt
+/private/var/folders/g0/mjy7jjt50v3cgv592cnt1pw40000gn/T/RtmpChJuwW/temp_libpath1f85515cf38a/semdistflow/extdata/Blake_BookofThel_part1.txt
 </td>
 <td style="text-align:left;">
 their

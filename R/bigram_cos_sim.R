@@ -3,10 +3,11 @@
 #' Details here
 #'
 #' @name bigram_cos_sim
-#' @param targetdf a data frame with long list of target words.
-#' @param lookupdb a data frame containing ratings
+#' @param targetdf a dataframe with long list of target words
+#' @param lookupdb a dataframe containing ratings
 #' @param colname1 the column name from targetdf used to join
 #' @param colname2 the column name from lookupdb used to join
+#' @param flipped choose to flip direction of cosine similarity
 #' @importFrom dplyr mutate
 #' @importFrom dplyr select
 #' @importFrom dplyr select_if

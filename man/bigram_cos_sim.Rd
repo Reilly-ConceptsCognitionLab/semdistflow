@@ -13,13 +13,15 @@ bigram_cos_sim(
 )
 }
 \arguments{
-\item{targetdf}{a data frame with long list of target words.}
+\item{targetdf}{a dataframe with long list of target words}
 
-\item{lookupdb}{a data frame containing ratings}
+\item{lookupdb}{a dataframe containing ratings}
 
 \item{colname1}{the column name from targetdf used to join}
 
 \item{colname2}{the column name from lookupdb used to join}
+
+\item{flipped}{choose to flip direction of cosine similarity}
 }
 \description{
 Details here
