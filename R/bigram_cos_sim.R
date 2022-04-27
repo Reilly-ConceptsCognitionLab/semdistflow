@@ -20,6 +20,7 @@
 bigram_cos_sim <- function(targetdf = x, lookupdb = wordvec, colname1 = NULL, colname2 = NULL, flipped = FALSE){
   col1 <- enquo(colname1) #renames column1 to col1 and allows you to enter the column name in the function without "quotations"
   col2 <- enquo(colname2)
+  #various embeddings can be found at https://osf.io/ryhfj/
 
   message("Isolating join columns")
   joining_df<- targetdf %>% dplyr::mutate(joincol = !!col1) #make a new column in targetdf named joincol to
