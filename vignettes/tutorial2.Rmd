@@ -41,7 +41,7 @@ mytexts.clean <- cleanme(mytexts, replace_pronoun = TRUE) # performs all cleanin
 
 # compute cosine distances
 ```{r clean,}
-source("~/Dropbox/semdistflow/R/distme.R", local = knitr::knit_global())
+#source("~/Dropbox/semdistflow/R/distme.R", local = knitr::knit_global())
 mytexts.dist <- distme(mytexts.clean, lemmatize = TRUE)
 ```
 
