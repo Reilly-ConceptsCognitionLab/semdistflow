@@ -60,7 +60,7 @@ janeeyre <- janeeyre[!apply(janeeyre == "", 1, all),]
 # remove extra spaces
 janeeyre <- trimws(janeeyre)
 
-write.table(janeeyre, "janeeyre_full.txt", row.names = FALSE, col.names = FALSE)
+#write.table(janeeyre, "janeeyre_full.txt", row.names = FALSE, col.names = FALSE)
 
 # read the Gutenberg txt file back in
 #janeeyre <- readtxt("/Users/litovsky/Dropbox/mytexts/")

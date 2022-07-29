@@ -33,6 +33,7 @@ Imports:
     knitr,
     lsa,
     textstem,
+    here
 Suggests: 
     rmarkdown,
     knitr,

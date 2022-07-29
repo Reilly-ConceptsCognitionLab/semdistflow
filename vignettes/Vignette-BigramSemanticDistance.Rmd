@@ -37,12 +37,14 @@ Each text you wish to process should be saved as a .txt file. Your texts should 
 
 # Loading your texts
 ```{r}
-mytexts <- readtxt(here("mytexts")) # input path name to .txt files, read in files
+# All texts to be analyzed should be in the "mytexts" folder - remove any files that you don't want analyzed in "mytexts"
+
+readtxt()
 ```
 
 The resulting data.frame should have two columns "doc_id" and "doc_text". 
 ```{r}
-print(mytexts)
+print(readtxt())
 ```
 
 If you wish to use this package but want to read in your data another way, you must ensure that you have the columns names "doc_id" and "doc_text". The "doc_id" column but be unique for each text. You may include other columns if you wish. 

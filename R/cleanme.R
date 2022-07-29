@@ -2,12 +2,13 @@
 #'
 #' Uses helper functions to clean raw text
 #'
+#' @name cleanme
 #' @param x A dataframe with of mutiple documents denoted in a column titled "doc_id" and raw text in a column titled "doc_text" .
 #' @return the function \code{cleanme} with return a dataframe of cleaned text documents, their document ID and the raw text.
 #' @importFrom tibble as_tibble
 #' @import stringi
 #' @import tidyverse
-#' @export
+#' @export cleanme
 
 cleanme <- function(datafile, replace_pronoun = FALSE){
 
