@@ -39,7 +39,7 @@ Each text you wish to process should be saved as a .txt file. Your texts should 
 ```{r}
 # All texts to be analyzed should be in the "mytexts" folder - remove any files that you don't want analyzed in "mytexts"
 
-readtxt()
+mytexts <- readtxt()
 ```
 
 The resulting data.frame should have two columns "doc_id" and "doc_text". 
