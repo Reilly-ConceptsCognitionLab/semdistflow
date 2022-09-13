@@ -1,5 +1,6 @@
 clean1 <- function(x) {
   x <- tolower(x) #to lower
+  x <- stringi::stri_replace_all_regex(x, multiwordplaces$target, multiwordplaces$replacement, vectorize_all = FALSE) ### combine multiword places into one spaceless string
   x <- gsub("\"", " ", x)
   x <- gsub("\n", " ", x)
   x <- textclean::replace_date(x)
