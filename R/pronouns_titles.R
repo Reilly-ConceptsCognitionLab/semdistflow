@@ -15,3 +15,4 @@ pronouns_titles <- function(x) {
   x <- gsub("\\betc\\.\\b", "", x)
   x <- gsub("\\bhadn\\'t\\b", " ", x)
 }
+
