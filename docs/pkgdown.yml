@@ -1,9 +1,12 @@
-pandoc: 2.14.0.3
-pkgdown: 2.0.2
+pandoc: '2.18'
+pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   BigramSemanticDistance-vignette: BigramSemanticDistance-vignette.html
-last_built: 2022-04-20T14:56Z
+  Vignette-BigramSemanticDistance: Vignette-BigramSemanticDistance.html
+  tutorial1: tutorial1.html
+  tutorial2: tutorial2.html
+last_built: 2022-10-21T17:42Z
 urls:
   reference: https://reilly-conceptscognitionlab.github.io/semdistflow/reference
   article: https://reilly-conceptscognitionlab.github.io/semdistflow/articles
