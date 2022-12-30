@@ -1,1 +1,1 @@
-utils::globalVariables(c("omissions", "replacements", "testdata", "modelload", "list_lemma", "upos", "DT", "x", "wordvec", "word", "joincol", "Row.names", "joincol", "datwvpairs"))
+utils::globalVariables(c("omissions", "replacements", "testdata", "modelload", "list_lemma", "upos", "DT", "x", "wordvec", "word", "joincol", "Row.names", "datwvpairs", "distme", "cleanme", "readme"))
