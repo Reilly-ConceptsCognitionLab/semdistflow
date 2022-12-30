@@ -2,18 +2,19 @@
 #'
 #' Read in .txt documents from a specified folder found in the current working directory.
 #'
-#' @name readtxt
-#' @return the function \code{readtxt} with return a single dataframe of text documents and their document ID
+#' @name readme
+#' @param folder_name A string.
+#' @return the function \code{readme} with return a single dataframe of text documents and their document ID
+#' @examples
+#' readtxt("text")
+#' readtxt("data")
 #' @importFrom data.table setattr
-#' @importFrom here here
 #' @export readtxt
-
-readtxt <- function() {
-  file_list <- list.files(path = here("mytexts/"), pattern = "*.txt", recursive = FALSE, full.names = TRUE) #list files with .txt ending
-
+readme <- function(folder_name = "my_texts"){
+  file_list <- list.files(path = folder_name, pattern = "*.txt", recursive = TRUE, full.names = TRUE) #list files with .txt ending
   textdata <- lapply(file_list, function(x) {
-    paste(readLines(x), collapse=" ")
-  }) #apply readlines over the file list
+    paste(readLines(x), collapse=" ", warn=F)
+  }) #apply readlines over the file list, no warning if last line is not complete
 
   data.table::setattr(textdata, "names", file_list) #add names attribute to textdata from file_list
 

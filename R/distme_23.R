@@ -1,8 +1,8 @@
-#' Rowwise Cosine Calculations
+#' Rowwise Cosine Distance Calculations
 #'
 #' Details here
 #'
-#' @name distme
+#' @name distme_23
 #' @param targetdf a dataframe with long list of target words
 #' @importFrom dplyr mutate
 #' @importFrom dplyr select
@@ -19,18 +19,20 @@
 # Not sure what to do about text_tools and referencing that folder
 #input the object from the cleanme() steps
 distme <- function(targetdf, lemmatize=TRUE){
+  message("Loading lookup databases and joining your data to SemDist15 and Glowca")
+  #load lookup databases
+  glowca_v1 <- load(here("data", "glowca_vol1_2023.rda")) #rounded 5,subtlex matched 60k
+  glowca_v2 <- load(here("data", "glowca_vol2_2023.rda"))
+  glowca <-  rbind(glowca_v1, glowca_v2)
+  sd15 <-  load(here("data", "semdist15_2023.rda"))
   if (lemmatize == TRUE) {
-    message("Loading lookup databases and joining your data to SemDist15 and Glowca")
-    #load lookup databases
-    load(here("data", "glowca_lite.rda")) #rounded 5,subtlex matched 60k
-    load(here("data", "semdist15_new.rda"))
     #groups by factor variables and unlists the string, one word per row
     dat <-targetdf %>% group_by(doc_id, doc_text) %>% tidytext::unnest_tokens(word, doc_clean)
     #lemmatizes target dataframe on column labeled 'lemma1'
     dat2 <- dat %>% mutate(lemma1 = textstem::lemmatize_words(word))
     #join semdist15 and glowca lookup databases with target input dataframe
-    joindf_semdist15 <- left_join(dat2, semdist15_new, by=c("lemma1"="word")) %>% data.frame()
-    joindf_glowca <- left_join(dat2, glowca_lite, by=c("lemma1"="word")) %>% data.frame()
+    joindf_semdist15 <- left_join(dat2, sd15, by=c("lemma1"="word")) %>% data.frame()
+    joindf_glowca <- left_join(dat2, glowca, by=c("lemma1"="word")) %>% data.frame()
     #Select numeric columns for cosine calculations, eliminate columns with string data
     dat_sd15 <- joindf_semdist15 %>% select_if(is.numeric)
     datglo <- joindf_glowca %>% select_if(is.numeric)
@@ -75,9 +77,7 @@ distme <- function(targetdf, lemmatize=TRUE){
 
   if (lemmatize == FALSE) {
     message("Loading lookup databases and joining your data to SemDist15 and Glowca")
-    here::i_am()
-    load(here("data", "glowca_lite.rda")) #rounded 5,subtlex matched 60k
-    load(here("data", "semdist15_new.rda"))
+
     #groups by factor variables and unlists the string, one word per row
     dat <-targetdf %>% group_by(doc_id, doc_text) %>% tidytext::unnest_tokens(word, doc_clean)
     #join semdist15 and glowca lookup databases with target input dataframe

@@ -4,5 +4,5 @@
 #' @export doitall
 
 doitall <- function() {
-  return(distme(cleanme(readtxt())))
+  return(distme(cleanme(readme())))
 }
