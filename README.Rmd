@@ -20,16 +20,26 @@ knitr::opts_chunk$set(
 
 ## Overview
 
-‘semdistflow’ transforms any user-specified text into sequential bigrams (e.g. ‘The dog drinks the milk’ to dog-drink, drink-milk, etc.).  The package can compute metrics of semantic distance for each bigram.  Users have many options for parameterizing semantic distance and tailoring their analyses to their own unique constraints (e.g., omitting stopwords, lemmatizing tokens, dimensionality of word embeddings).
+‘semdistflow’ transforms any user-specified text into sequential bigrams (e.g. ‘The dog drinks the milk’ to dog-drink, drink-milk, etc.).  The package computes two measures of semantic distance for every running bigram in a language transcript.  Users have many options for how to structure their texts and tailor the output to their own unique constraints (e.g., omitting stopwords, lemmatizing tokens, dimensionality of word embeddings).
 
 ## Installation
 
-You can install the development version of semdistflow from [GitHub](https://github.com/) with:
+You can install the development version of semdistflow from [GitHub](https://github.com/) by typing the following in your console or script (make sure you have devtools installed):
 
 ``` {r }
 # install.packages("devtools")
 devtools::install_github("Reilly-ConceptsCognitionLab/semdistflow")
 ```
+
+## The main functions
+readme() will look for any text files in your folder (preferably called my_texts) but you can specify your own folder name. 
+<br />
+<br />
+cleanme() takes the dataframe from the readme step and does all sorts of cleaning and formatting operations to it.
+<br />
+<br />
+distme() vectorizes the clean dataframe from the last step and comoputes two measures of semantic distance for every word pair
+
 
 ## Example of Cleaning Function
 
@@ -38,7 +48,6 @@ This is a basic example which shows you how the cleanme function works:
 ```{r example, message=FALSE}
 library(semdistflow)
 library(tidyverse)
-
 doc_id <- "fox"
 doc_text <- "The quick brown fox jumps over the lazy dog."
 fox_text <-as.data.frame(cbind(doc_id,doc_text))
@@ -58,10 +67,7 @@ This is a basic example which shows you how the cleanme function works:
 fox_token <-fox_clean %>%
   group_by(doc_id, doc_text) %>%
   tidytext::unnest_tokens(word, doc_clean, drop=F)
-
-fox_token$lemma<- textstem::lemmatize_words(fox_token$word)
-
-
+  fox_token$lemma<- textstem::lemmatize_words(fox_token$word)
 fox_token
 ```
 
