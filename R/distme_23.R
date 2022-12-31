@@ -14,9 +14,8 @@
 #' @importFrom lsa cosine
 #' @importFrom here here
 #' @importFrom magrittr %>%
-#' @export distme
+#' @export distme_23
 
-# Not sure what to do about text_tools and referencing that folder
 #input the object from the cleanme() steps
 distme <- function(targetdf, lemmatize=TRUE){
   message("Loading lookup databases and joining your data to SemDist15 and Glowca")

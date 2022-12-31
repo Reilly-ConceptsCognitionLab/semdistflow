@@ -15,4 +15,4 @@ cleanme <- function(dat){
   return(as_tibble(final))
 }
 
-devtools::document()
+
