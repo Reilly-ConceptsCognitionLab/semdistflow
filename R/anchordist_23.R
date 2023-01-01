@@ -18,11 +18,15 @@
 #' @importFrom magrittr %>%
 #' @export anchordist
 
+#anchorsize is the number of words in the beginning of the language transcript upon which to base subsequent distance on
+#window size is the number of words in a distance window (e.g., dog, leash, cat) averages vectors across words
 anchordist <- function(targetdf, anchorsize, windowsize){
   message("Loading lookup databases and joining your data to SemDist15 and Glowca")
   #load lookup databases
-  load(here("data", "glowca_lite.rda")) #rounded 5,subtlex matched 60k
-  load(here("data", "semdist15_new.rda"))
+  glowca_v1 <- readRDS(here("data", "glowca_vol1_2023.rda")) #rounded 5,subtlex matched 60k
+  glowca_v2 <- readRDS(here("data", "glowca_vol2_2023.rda"))
+  glowca <-  rbind(glowca_v1, glowca_v2)
+  sd15 <-  readRDS(here("data", "semdist15_2023.rda"))
   #groups by factor variables and unlists the string, one word per row
   dat <- targetdf %>% group_by(doc_id, doc_text) %>% tidytext::unnest_tokens(word, doc_clean)
   #lemmatizes target dataframe on column labeled 'lemma1'
@@ -30,38 +34,23 @@ anchordist <- function(targetdf, anchorsize, windowsize){
   #join semdist15 and glowca lookup databases with target input dataframe
   joindf_semdist15 <- left_join(dat2, semdist15_new, by=c("lemma1"="word")) %>% data.frame()
   joindf_glowca <- left_join(dat2, glowca_lite, by=c("lemma1"="word")) %>% data.frame()
-
-  # compute averaged anchor vector
-  anchor_semdist15 <- joindf_semdist15 %>%
-    group_by(doc_id) %>%
-    slice(1:anchorsize) # select rows corresponding to anchor size
-
-  anchor_glowca <- joindf_glowca %>%
-    group_by(doc_id) %>%
-    slice(1:anchorsize)
-
-  avganchor_semdist15 <- anchor_semdist15 %>%
-    group_by(doc_id) %>%
-    summarize(across(auditory:sadness, mean, na.rm = TRUE)) # mean vector of anchor
-
-  avganchor_glowca <- anchor_glowca %>%
-    group_by(doc_id) %>%
-    summarize(across(X1:X300, mean, na.rm = TRUE))
-
-  avganchor_semdist15 <- avganchor_semdist15 %>% mutate(window_index = 0) # give a window_index of 0 to combine with later window df
+  # isolate rows the anchor words and their corresponding semantic vectors for SD15 based on user-defined anchor window
+  anchor_semdist15 <- joindf_semdist15 %>% group_by(doc_id) %>% slice(1:anchorsize) # select rows corresponding to anchor size
+  # isolate rows corresponding to the anchor words and their corresponding semantic vectors for glowca based on user-defined anchor window
+  anchor_glowca <- joindf_glowca %>% group_by(doc_id) %>% slice(1:anchorsize)
+  # compute mean semantic vector for the entire anchorword group (size specified in function)
+  avganchor_semdist15 <- anchor_semdist15 %>% group_by(doc_id) %>% summarize(across(auditory:sadness, mean, na.rm = TRUE)) # mean vector of anchor
+  # compute mean semantic vector for the entire anchorword group (size specified in function)
+  avganchor_glowca <- anchor_glowca %>% group_by(doc_id) %>% summarize(across(X1:X300, mean, na.rm = TRUE))
+  # give a window_index of 0 to combine with later window df
+  avganchor_semdist15 <- avganchor_semdist15 %>% mutate(window_index = 0)
   avganchor_glowca <- avganchor_glowca %>% mutate(window_index = 0)
-
-  avganchor_semdist15 <- avganchor_semdist15 %>% select(c(doc_id, window_index), everything()) # make window_index first column
+  # make window_index first column
+  avganchor_semdist15 <- avganchor_semdist15 %>% select(c(doc_id, window_index), everything())
   avganchor_glowca <- avganchor_glowca %>% select(c(doc_id, window_index), everything())
-
-  # compute average of each window
-  windows_semdist15 <- joindf_semdist15 %>%
-    group_by(doc_id) %>%
-    slice(anchorsize+1:n()) # select all rows not in anchor
-
-  windows_glowca <- joindf_glowca %>%
-    group_by(doc_id) %>%
-    slice(anchorsize+1:n())
+  # select all rows not in anchor
+  windows_semdist15 <- joindf_semdist15 %>% group_by(doc_id) %>% slice(anchorsize+1:n())
+  windows_glowca <- joindf_glowca %>% group_by(doc_id) %>% slice(anchorsize+1:n())
 
   windows_semdist15 <- windows_semdist15 %>%
     group_by(doc_id) %>%

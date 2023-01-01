@@ -2,14 +2,16 @@
 #'
 #' Read in .txt documents from a specified folder found in the current working directory.
 #'
-#' @name readme_23
-#' @param folder_name A string.
+#' @name readme
+#' @param folder_name  string denoting where user's text files are located ('my_texts' is good)
 #' @return the function \code{readme} with return a single dataframe of text documents and their document ID
 #' @examples
 #' readtxt("text")
 #' readtxt("data")
 #' @importFrom data.table setattr
-#' @export readme_23
+#' @export readme
+
+
 readme <- function(folder_name = "my_texts"){
   file_list <- list.files(path = folder_name, pattern = "*.txt", recursive = TRUE, full.names = TRUE) #list files with .txt ending
   textdata <- lapply(file_list, function(x) {

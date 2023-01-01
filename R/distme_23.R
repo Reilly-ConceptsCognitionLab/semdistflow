@@ -2,7 +2,7 @@
 #'
 #' Details here
 #'
-#' @name distme_23
+#' @name distme
 #' @param targetdf a dataframe with long list of target words
 #' @importFrom dplyr mutate
 #' @importFrom dplyr select
@@ -14,16 +14,16 @@
 #' @importFrom lsa cosine
 #' @importFrom here here
 #' @importFrom magrittr %>%
-#' @export distme_23
+#' @export distme
 
 #input the object from the cleanme() steps
 distme <- function(targetdf, lemmatize=TRUE){
   message("Loading lookup databases and joining your data to SemDist15 and Glowca")
   #load lookup databases
-  glowca_v1 <- load(here("data", "glowca_vol1_2023.rda")) #rounded 5,subtlex matched 60k
-  glowca_v2 <- load(here("data", "glowca_vol2_2023.rda"))
+  glowca_v1 <- readRDS(here("data", "glowca_vol1_2023.rda")) #rounded 5,subtlex matched 60k
+  glowca_v2 <- readRDS(here("data", "glowca_vol2_2023.rda"))
   glowca <-  rbind(glowca_v1, glowca_v2)
-  sd15 <-  load(here("data", "semdist15_2023.rda"))
+  sd15 <-  readRDS(here("data", "semdist15_2023.rda"))
   if (lemmatize == TRUE) {
     #groups by factor variables and unlists the string, one word per row
     dat <-targetdf %>% group_by(doc_id, doc_text) %>% tidytext::unnest_tokens(word, doc_clean)
