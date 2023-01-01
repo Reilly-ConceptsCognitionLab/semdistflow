@@ -13,7 +13,7 @@
 #' @importFrom stringi stri_replace_all_regex
 #' @importFrom textclean replace_contraction
 #' @importFrom tm removeWords
-#' @importFrom tm::stripWhitespace(x)
+#' @importFrom tm stripWhitespace
 #' @keywords internal
 #' @export cleanme
 
