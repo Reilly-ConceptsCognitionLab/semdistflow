@@ -11,7 +11,7 @@
 #' @importFrom dplyr group_by
 #' @importFrom textclean replace_date
 #' @importFrom stringi stri_replace_all_regex
-#' @importFrom textclean replace_contraction(x)
+#' @importFrom textclean replace_contraction
 #' @importFrom tm removeWords
 #' @importFrom tm::stripWhitespace(x)
 #' @keywords internal
