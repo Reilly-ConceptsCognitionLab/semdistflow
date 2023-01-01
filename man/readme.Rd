@@ -7,7 +7,7 @@
 readme(folder_name = "my_texts")
 }
 \arguments{
-\item{folder_name}{A string.}
+\item{folder_name}{string denoting where user's text files are located ('my_texts' is good)}
 }
 \value{
 the function \code{readme} with return a single dataframe of text documents and their document ID
