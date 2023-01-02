@@ -24,22 +24,17 @@ knitr::opts_chunk$set(
 
 ## Installation
 
-You can install the development version of semdistflow from [GitHub](https://github.com/) by typing the following in your console or script (make sure you have devtools installed):
+Install semdistflow from [GitHub](https://github.com/) by typing the following in your console or script (make sure you have devtools installed):
 
-``` {r }
+``` {r}
 # install.packages("devtools")
 devtools::install_github("Reilly-ConceptsCognitionLab/semdistflow")
 ```
 
 ## The main functions
-readme() will look for any text files in your folder (preferably called my_texts) but you can specify your own folder name. 
-<br />
-<br />
-cleanme() takes the dataframe from the readme step and does all sorts of cleaning and formatting operations to it.
-<br />
-<br />
-distme() vectorizes the clean dataframe from the last step and comoputes two measures of semantic distance for every word pair
-
+1.  <span style="color:red">readme()</span> reads the txt file into R, appends a document id based on its filename and formats the text as a dataframe. <br >
+2. <span style="color:red">cleanme() </span> uses many regular expressions to clean and format the text. These include omitting contractions, converting to lowercase, omitting numbers, omitting stopwords, etc. <br/>
+3. <span style="color:red">distme()</span> computes two metrics of semantic distance for each running pair of words in the language sample you just cleaned. These are outputted as a vector of word pairs.
 
 ## Example of Cleaning Function
 

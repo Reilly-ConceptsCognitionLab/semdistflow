@@ -1,14 +1,14 @@
 Package: semdistflow
 Type: Package
-Title: strip, format, vectorize text to sequential bigram semantic distance
+Title: semdistflow: semantic distance for natural language samples
 Version: 0.1.0
 Authors@R: c(
-    person(c("Bonnie",  "M."), "Zuckerman", role = c("aut")), 
     person("Jamie", "Reilly", role = c("aut", "cre"), email ="jamie_reilly@temple.edu"),
-    person(c("Celia", "P."), "Litovsky", role = c("aut")),
-    person("Ann Marie ", "Finley", role = c("aut")))
+    person(c("Bonnie",  "M."), "Zuckerman", role = c("aut")), 
+    person(c("Celia", "P."), "Litovsky", role = c("ctb")),
+    person("Ann Marie ", "Finley", role = c("ctb")))
 Maintainer: Jamie Reilly <jamie_reilly@temple.edu>
-Description: Options for reading your text into R, cleaning and stripping the text to isolate open class words, tokenizing into sequential bigrams and computing semantic distance for each bigram.
+Description: Options for reading natural language text into R, cleaning and stripping the text to isolate open class words, tokenizing into sequential bigrams and computing two metrics of cosine semantic distance for each running bigram.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
