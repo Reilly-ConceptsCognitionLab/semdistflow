@@ -10,6 +10,9 @@
     <loc>https://reilly-conceptscognitionlab.github.io/semdistflow/articles/BigramSemanticDistance-vignette.html</loc>
   </url>
   <url>
+    <loc>https://reilly-conceptscognitionlab.github.io/semdistflow/articles/Vignette-BigramSemanticDistance.html</loc>
+  </url>
+  <url>
     <loc>https://reilly-conceptscognitionlab.github.io/semdistflow/articles/index.html</loc>
   </url>
   <url>
@@ -17,6 +20,9 @@
   </url>
   <url>
     <loc>https://reilly-conceptscognitionlab.github.io/semdistflow/index.html</loc>
+  </url>
+  <url>
+    <loc>https://reilly-conceptscognitionlab.github.io/semdistflow/reference/anchordist.html</loc>
   </url>
   <url>
     <loc>https://reilly-conceptscognitionlab.github.io/semdistflow/reference/bigram_cos_sim.html</loc>
@@ -34,6 +40,12 @@
     <loc>https://reilly-conceptscognitionlab.github.io/semdistflow/reference/cleanme.html</loc>
   </url>
   <url>
+    <loc>https://reilly-conceptscognitionlab.github.io/semdistflow/reference/distme.html</loc>
+  </url>
+  <url>
+    <loc>https://reilly-conceptscognitionlab.github.io/semdistflow/reference/doitall.html</loc>
+  </url>
+  <url>
     <loc>https://reilly-conceptscognitionlab.github.io/semdistflow/reference/hello.html</loc>
   </url>
   <url>
@@ -41,6 +53,9 @@
   </url>
   <url>
     <loc>https://reilly-conceptscognitionlab.github.io/semdistflow/reference/pronouns_titles.html</loc>
+  </url>
+  <url>
+    <loc>https://reilly-conceptscognitionlab.github.io/semdistflow/reference/readme.html</loc>
   </url>
   <url>
     <loc>https://reilly-conceptscognitionlab.github.io/semdistflow/reference/readtxt.html</loc>
