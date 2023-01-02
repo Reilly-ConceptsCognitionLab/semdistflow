@@ -18,8 +18,8 @@
 #' @export cleanme
 
 cleanme<- function(x) {
-  load(here::here("data", "omissions_2023.rda"))
-  load(here::here("data", "replacements_2023.rda"))
+  #load(here::here("data", "omissions_2023.rda"))  only use if in markdown
+  #load(here::here("data", "replacements_2023.rda"))
   omissions <- omissions_2023
   replacements <- replacements_2023
   message("Performing text cleaning.... sit tight!")

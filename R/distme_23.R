@@ -20,8 +20,10 @@
 distme <- function(targetdf, lemmatize=TRUE){
   message("Loading lookup databases and joining your data to SemDist15 and Glowca")
   #load lookup databases
-  glowca_v1 <- readRDS(here("data", "glowca_vol1_2023.rda")) #rounded 5,subtlex matched 60k
-  glowca_v2 <- readRDS(here("data", "glowca_vol2_2023.rda"))
+  #glowca_v1 <- readRDS(here("data", "glowca_vol1_2023.rda")) #rounded 5,subtlex matched 60k
+  #glowca_v2 <- readRDS(here("data", "glowca_vol2_2023.rda"))
+  data(glowca_vol1_2023) #assumes package lazyloads the datasets
+  data(glowca_vol2_2023)
   glowca <-  rbind(glowca_v1, glowca_v2)
   sd15 <-  readRDS(here("data", "semdist15_2023.rda"))
   if (lemmatize == TRUE) {
