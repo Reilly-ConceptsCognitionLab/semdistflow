@@ -29,12 +29,14 @@ distme <- function(targetdf, lemmatize=TRUE){
   dat <- data.frame(targetdf)
   if (lemmatize == TRUE) {
     #groups by factor variables and unlists the string, one word per row
-    dat <-targetdf %>% group_by(doc_id, doc_text) %>% tidytext::unnest_tokens(word, doc_clean)
+    dat <-dat %>% group_by(doc_id, doc_text) %>% tidytext::unnest_tokens(word, doc_clean)
     #lemmatizes target dataframe on column labeled 'lemma1'
     dat2 <- dat %>% mutate(lemma1 = textstem::lemmatize_words(word))
     #join semdist15 and glowca lookup databases with target input dataframe
-    joindf_semdist15 <- left_join(dat2, sd15, by=c("lemma1"="word")) %>% data.frame()
-    joindf_glowca <- left_join(dat2, glowca, by=c("lemma1"="word")) %>% data.frame()
+    joindf_semdist15 <- left_join(dat2, sd15, by=c("lemma1"="word"))
+    joindf_semdist15 <- data.frame(joindf_semdist15)
+    joindf_glowca <- left_join(dat2, glowca, by=c("lemma1"="word"))
+    joindf_glowca <- data.frame(joindf_glowca)
     #Select numeric columns for cosine calculations, eliminate columns with string data
     dat_sd15 <- joindf_semdist15 %>% select_if(is.numeric)
     datglo <- joindf_glowca %>% select_if(is.numeric)
@@ -80,11 +82,13 @@ distme <- function(targetdf, lemmatize=TRUE){
   if (lemmatize == FALSE) {
     message("Loading lookup databases and joining your data to SemDist15 and Glowca")
     #groups by factor variables and unlists the string, one word per row
-    dat <-targetdf %>% group_by(doc_id, doc_text) %>% tidytext::unnest_tokens(word, doc_clean)
+    dat <-dat %>% group_by(doc_id, doc_text) %>% tidytext::unnest_tokens(word, doc_clean)
     #join semdist15 and glowca lookup databases with target input dataframe
-    joindf_semdist15 <- left_join(dat2, semdist15_new, by=c("word1"="word")) %>% data.frame()
+    joindf_semdist15 <- left_join(dat2, semdist15_new, by=c("word1"="word"))
+    joindf_semdist15 <- data.frame(joindf_semdist15)
     joindf_glowca <- left_join(dat2, glowca_lite, by=c("word1"="word")) %>% data.frame()
     #Select numeric columns for cosine calculations, eliminate columns with string data
+    joindf_glowca <- data.frame(joindf_glowca)
     dat_sd15 <- joindf_semdist15 %>% select_if(is.numeric)
     datglo <- joindf_glowca %>% select_if(is.numeric)
     message("Computing Distances.... Be patient!!!")
