@@ -37,6 +37,8 @@ Imports:
 Suggests: 
     rmarkdown,
     knitr,
-    printr
+    printr,
+    testthat (>= 3.0.0)
 VignetteBuilder: rmarkdown
 URL: https://reilly-conceptscognitionlab.github.io/semdistflow
+Config/testthat/edition: 3

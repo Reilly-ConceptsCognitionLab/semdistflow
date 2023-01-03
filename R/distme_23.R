@@ -24,8 +24,9 @@ distme <- function(targetdf, lemmatize=TRUE){
   #glowca_v2 <- readRDS(here("data", "glowca_vol2_2023.rda"))
   data(glowca_vol1_2023) #assumes package lazyloads the datasets
   data(glowca_vol2_2023)
+  data(semdist15_2023)
   glowca <-  rbind(glowca_v1, glowca_v2)
-  sd15 <-  readRDS(here("data", "semdist15_2023.rda"))
+  #sd15 <-  readRDS(here("data", "semdist15_2023.rda"))
   if (lemmatize == TRUE) {
     #groups by factor variables and unlists the string, one word per row
     dat <-targetdf %>% group_by(doc_id, doc_text) %>% tidytext::unnest_tokens(word, doc_clean)
