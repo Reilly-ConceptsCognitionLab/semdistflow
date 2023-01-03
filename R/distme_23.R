@@ -3,7 +3,7 @@
 #' Details here
 #'
 #' @name distme
-#' @param targetdf a dataframe with long list of target words
+#' @param targetdf a dataframe representing a list of words under the column header doc_clean
 #' @importFrom dplyr mutate
 #' @importFrom dplyr select
 #' @importFrom dplyr select_if
@@ -26,7 +26,7 @@ distme <- function(targetdf, lemmatize=TRUE){
   glowca <-  rbind(glowca_v1, glowca_v2)
   sd15 <- data.frame(sd15)
   glowca <- data.frame(sd15)
-  dat <- data.frame(dat)
+  dat <- data.frame(targetdf)
   if (lemmatize == TRUE) {
     #groups by factor variables and unlists the string, one word per row
     dat <-targetdf %>% group_by(doc_id, doc_text) %>% tidytext::unnest_tokens(word, doc_clean)
