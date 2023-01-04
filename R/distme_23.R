@@ -20,12 +20,10 @@
 distme <- function(targetdf, lemmatize=TRUE){
   message("Loading lookup databases and joining your data to SemDist15 and Glowca")
   #load lookup databases
-  glowca_v1 <- data(glowca_vol1_2023) #assumes package lazyloads the datasets
-  glowca_v2 <- data(glowca_vol2_2023)
-  sd15 <- data(semdist15_2023)
+  glowca_v1 <- glowca_vol1_2023 #assumes package lazyloads the datasets
+  glowca_v2 <- glowca_vol2_2023
+  sd15 <- semdist15_2023
   glowca <-  rbind(glowca_v1, glowca_v2)
-  sd15 <- data.frame(sd15)
-  glowca <- data.frame(glowca)
   dat <- data.frame(targetdf)
   if (lemmatize == TRUE) {
     #groups by factor variables and unlists the string, one word per row
@@ -85,9 +83,9 @@ distme <- function(targetdf, lemmatize=TRUE){
     #groups by factor variables and unlists the string, one word per row
     dat <-dat %>% group_by(doc_id, doc_text) %>% tidytext::unnest_tokens(word, doc_clean)
     #join semdist15 and glowca lookup databases with target input dataframe
-    joindf_semdist15 <- dplyr::left_join(dat2, semdist15_new, by=c("word1"="word"))
+    joindf_semdist15 <- dplyr::left_join(dat2, sd15, by=c("word1"="word"))
     joindf_semdist15 <- data.frame(joindf_semdist15)
-    joindf_glowca <- dplyr::left_join(dat2, glowca_lite, by=c("word1"="word"))
+    joindf_glowca <- dplyr::left_join(dat2, glowca, by=c("word1"="word"))
     joindf_glowca <- data.frame(joindf_glowca)
     #Select numeric columns for cosine calculations, eliminate columns with string data
     dat_sd15 <- joindf_semdist15 %>% select_if(is.numeric)
