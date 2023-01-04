@@ -43,15 +43,16 @@ distme <- function(targetdf, lemmatize=TRUE){
     mat_sd15 <- as.matrix(dat_sd15)
     mat_glo <- as.matrix(datglo)
     #compute cosine distance for each running pair of words in sd15 and glowca
-    vals_sd15 <- unlist(lapply(2:nrow(mat_sd15), function(i){
-      lsa::cosine(mat_sd15[i-1,],  mat_sd15[i,])
-    }))
-    vals_glo <- unlist(lapply(2:nrow(mat_glo), function(i){
-      lsa::cosine(mat_glo[i-1,], mat_glo[i,])
-    }))
+    vals_sd15 <- lapply(2:nrow(mat_sd15), function(i){
+      lsa::cosine(mat_sd15[i-1,],  mat_sd15[i,])}) #try this
+    vals_sd15 <- data.frame(unlist(vals_sd15))
+    #vals_sd15 <- unlist(lapply(2:nrow(mat_sd15), function(i){ lsa::cosine(mat_sd15[i-1,],  mat_sd15[i,])}))
+    #vals_glo <- unlist(lapply(2:nrow(mat_glo), function(i){lsa::cosine(mat_glo[i-1,], mat_glo[i,])}))
     #Convert matrices back to dataframes
-    vals_sd15 <- data.frame(vals_sd15)
-    vals_glo <- data.frame(vals_glo)
+    vals_glo <- lapply(2:nrow(mat_glo), function(i){lsa::cosine(mat_glo[i-1,],  mat_glo[i,])})
+    vals_glo <- data.frame(unlist(vals_glo))
+    #vals_sd15 <- data.frame(vals_sd15)
+    #vals_glo <- data.frame(vals_glo)
     #Rename first column of cosine distance values
     names(vals_sd15)[1] <- "Sd15_Cosine"
     names(vals_glo)[1] <- "Glo_Cosine"
