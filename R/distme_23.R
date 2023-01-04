@@ -33,9 +33,9 @@ distme <- function(targetdf, lemmatize=TRUE){
     #lemmatizes target dataframe on column labeled 'lemma1'
     dat2 <- dat %>% mutate(lemma1 = textstem::lemmatize_words(word))
     #join semdist15 and glowca lookup databases with target input dataframe
-    joindf_semdist15 <- dplyr::left_join(dat2, sd15, by=c("word"="lemma1"))
+    joindf_semdist15 <- dplyr::left_join(dat2, sd15, by=c("lemma1"="word"))
     joindf_semdist15 <- data.frame(joindf_semdist15)
-    joindf_glowca <- dplyr::left_join(dat2, glowca, by=c("word"="lemma1"))
+    joindf_glowca <- dplyr::left_join(dat2, glowca, by=c("lemma1"="word"))
     joindf_glowca <- data.frame(joindf_glowca)
     #Select numeric columns for cosine calculations, eliminate columns with string data
     dat_sd15 <- joindf_semdist15 %>% select_if(is.numeric)
