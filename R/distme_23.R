@@ -25,17 +25,15 @@ distme <- function(targetdf, lemmatize=TRUE){
   sd15 <- semdist15_2023
   glowca <-  rbind(glowca_v1, glowca_v2)
   dat <- data.frame(targetdf)
+  #groups by factor variables and unlists the string, one word per row
+  dat <- dat %>% group_by(doc_id, doc_text) %>% tidytext::unnest_tokens(word, doc_clean)
   if (lemmatize == TRUE) {
     #groups by factor variables and unlists the string, one word per row
-    dat <-dat %>% group_by(doc_id, doc_text) %>% tidytext::unnest_tokens(word, doc_clean)
     #lemmatizes target dataframe on column labeled 'lemma1'
     dat2 <- dat %>% mutate(lemma1 = textstem::lemmatize_words(word))
-    dat2 <- ungroup(dat2) #TRY THIS UNGROUP TO ALLOW LEFT JOIN WITH REGULAR DATAFRAME
     #join semdist15 and glowca lookup databases with target input dataframe
     joindf_semdist15 <- dplyr::left_join(dat2, sd15, by=c("lemma1"="word"))
-    joindf_semdist15 <- joindf_semdist15 %>% group_by(doc_id, doc_text) #TRY THIS REGROUP
     joindf_glowca <- dplyr::left_join(dat2, glowca, by=c("lemma1"="word"))
-    joindf_glowca <- joindf_glowca %>% group_by(doc_id, doc_text) #TRY THIS
     #Select numeric columns for cosine calculations, eliminate columns with string data
     dat_sd15 <- joindf_semdist15 %>% select_if(is.numeric)
     datglo <- joindf_glowca %>% select_if(is.numeric)
@@ -43,16 +41,14 @@ distme <- function(targetdf, lemmatize=TRUE){
     mat_sd15 <- as.matrix(dat_sd15)
     mat_glo <- as.matrix(datglo)
     #compute cosine distance for each running pair of words in sd15 and glowca
-    vals_sd15 <- lapply(2:nrow(mat_sd15), function(i){
-      lsa::cosine(mat_sd15[i-1,],  mat_sd15[i,])}) #try this
-    vals_sd15 <- data.frame(unlist(vals_sd15))
-    #vals_sd15 <- unlist(lapply(2:nrow(mat_sd15), function(i){ lsa::cosine(mat_sd15[i-1,],  mat_sd15[i,])}))
-    #vals_glo <- unlist(lapply(2:nrow(mat_glo), function(i){lsa::cosine(mat_glo[i-1,], mat_glo[i,])}))
-    #Convert matrices back to dataframes
-    vals_glo <- lapply(2:nrow(mat_glo), function(i){lsa::cosine(mat_glo[i-1,],  mat_glo[i,])})
-    vals_glo <- data.frame(unlist(vals_glo))
-    #vals_sd15 <- data.frame(vals_sd15)
-    #vals_glo <- data.frame(vals_glo)
+    vals_sd15 <- unlist(lapply(2:nrow(mat_sd15), function(i){
+      lsa::cosine(mat_sd15[i-1,],  mat_sd15[i,])
+      }))
+    vals_glo <- unlist(lapply(2:nrow(mat_glo), function(i){
+      lsa::cosine(mat_glo[i-1,], mat_glo[i,])
+      }))
+    vals_sd15 <- data.frame(vals_sd15)
+    vals_glo <- data.frame(vals_glo)
     #Rename first column of cosine distance values
     names(vals_sd15)[1] <- "Sd15_Cosine"
     names(vals_glo)[1] <- "Glo_Cosine"
@@ -76,13 +72,12 @@ distme <- function(targetdf, lemmatize=TRUE){
       mutate(Glowca_CosRev0Score = replace(Glowca_CosRev0Score, n(), NA)) %>%
       ungroup -> mydists_lemmatized_NAatend
     #output a formatted dataframe
-    return(as_tibble(mydists_lemmatized_NAatend))
+    return(as_tibble(mydists))
   }
 
   if (lemmatize == FALSE) {
     message("Loading lookup databases and joining your data to SemDist15 and Glowca")
     #groups by factor variables and unlists the string, one word per row
-    dat <-dat %>% group_by(doc_id, doc_text) %>% tidytext::unnest_tokens(word, doc_clean)
     #join semdist15 and glowca lookup databases with target input dataframe
     joindf_semdist15 <- dplyr::left_join(dat2, sd15, by=c("word1"="word"))
     joindf_semdist15 <- data.frame(joindf_semdist15)
@@ -128,7 +123,7 @@ distme <- function(targetdf, lemmatize=TRUE){
       mutate(Glowca_CosRev0Score = replace(Glowca_CosRev0Score, n(), NA)) %>%
       ungroup -> mydists_unlemmatized_NAatend
     #output a formatted dataframe
-    return(as_tibble(mydists_unlemmatized_NAatend))
+    return(as_tibble(mydists))
   }
 }
 
