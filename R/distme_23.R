@@ -25,7 +25,7 @@ distme <- function(targetdf, lemmatize=TRUE){
   sd15 <- data(semdist15_2023)
   glowca <-  rbind(glowca_v1, glowca_v2)
   sd15 <- data.frame(sd15)
-  glowca <- data.frame(sd15)
+  glowca <- data.frame(glowca)
   dat <- data.frame(targetdf)
   if (lemmatize == TRUE) {
     #groups by factor variables and unlists the string, one word per row
