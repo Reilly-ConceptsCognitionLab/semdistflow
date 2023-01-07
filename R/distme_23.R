@@ -14,6 +14,7 @@
 #' @importFrom lsa cosine
 #' @importFrom here here
 #' @importFrom magrittr %>%
+#' @importFrom as.tibble
 #' @export distme
 
 #input the object from the cleanme() steps
@@ -34,8 +35,8 @@ distme <- function(targetdf, lemmatize=TRUE){
     joindf_semdist15 <- dplyr::left_join(dat2, sd15, by=c("lemma1"="word"))
     joindf_glowca <- dplyr::left_join(dat2, glowca, by=c("lemma1"="word"))
     #Select numeric columns dplyr fn operates on tibbles
-    dat_sd15_onlynumeric <- as.tibble(joindf_semdist15) %>% dplyr::select_if(is.numeric)
-    dat_glo_onlynumeric <- as.tibble(joindf_glowca) %>% dplyr::select_if(is.numeric)
+    dat_sd15_onlynumeric <- tibble::as.tibble(joindf_semdist15) %>% dplyr::select_if(is.numeric)
+    dat_glo_onlynumeric <- tibble::as.tibble(joindf_glowca) %>% dplyr::select_if(is.numeric)
     #convert join dataframes containing hyperparameter values (glowca and sd15) to matrices
     mat_sd15 <- data.matrix(dat_sd15_onlynumeric)
     mat_glo <- data.matrix(dat_glo_onlynumeric)
@@ -74,8 +75,8 @@ distme <- function(targetdf, lemmatize=TRUE){
     joindf_semdist15 <- dplyr::left_join(dat, sd15, by=c("word1"="word"))
     joindf_glowca <- dplyr::left_join(dat, glowca, by=c("word1"="word"))
     #Select numeric columns for cosine calculations, eliminate columns with string data
-    dat_sd15_onlynumeric <- as.tibble(joindf_semdist15) %>% dplyr::select_if(is.numeric)
-    dat_glo_onlynumeric <- as.tibble(joindf_glowca) %>% dplyr::select_if(is.numeric)
+    dat_sd15_onlynumeric <- tibble::as.tibble(joindf_semdist15) %>% dplyr::select_if(is.numeric)
+    dat_glo_onlynumeric <- tibble::as.tibble(joindf_glowca) %>% dplyr::select_if(is.numeric)
     #convert join dataframes containing hyperparameter values (glowca and sd15) to matrices
     mat_sd15 <- data.matrix(dat_sd15_onlynumeric)
     mat_glo <- data.matrix(dat_glo_onlynumeric)
