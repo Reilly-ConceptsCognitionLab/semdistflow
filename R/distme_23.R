@@ -14,7 +14,7 @@
 #' @importFrom lsa cosine
 #' @importFrom here here
 #' @importFrom magrittr %>%
-#' @importFrom as.tibble
+#' @importFrom tibble as.tibble
 #' @export distme
 
 #input the object from the cleanme() steps
